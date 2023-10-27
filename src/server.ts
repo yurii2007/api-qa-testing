@@ -10,7 +10,7 @@ mongoose
       console.log("Successfully connected to database");
     });
   })
-  .catch((error) => {
+  .catch((error: Error) => {
     console.log(error.message);
     process.exit(1);
-  });
+  })
