@@ -1,9 +1,8 @@
-const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+import { Schema, model } from "mongoose";
+// const Joi = require("joi")
+import utils from "../utils";
 
-const { handleMongooseError } = require("../utils");
-
-const UserSchema = new Schema(
+const userSchema = new Schema(
   {
     username: {
       type: String,
@@ -13,6 +12,10 @@ const UserSchema = new Schema(
       type: String,
       required: [true, "Email is required"],
       unique: true,
+    },
+    password: {
+      type: String,
+      required: [true, "Password is required"],
     },
     avatarURL: String,
     token: String,
@@ -28,8 +31,8 @@ const UserSchema = new Schema(
   { versionKey: false }
 );
 
-UserSchema.post("save", handleMongooseError);
+userSchema.post("save", utils.handleMongooseError);
 
-const User = model("user", UserSchema);
+const User = model("user", userSchema);
 
-module.exports = { User };
+export default User;

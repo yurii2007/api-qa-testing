@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
+import authRouter from "./routes/api/auth";
+
 type ServerError = {
   status?: number;
   message?: string;
@@ -14,6 +16,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
+
+app.use("/api/auth", authRouter);
 
 app.use((_: any, res: Response) => {
   res.status(404).json({ message: "Not Found" });

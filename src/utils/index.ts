@@ -1,5 +1,11 @@
-const handleMongooseError = require("./handleMongooseError");
+import handleMongooseError from "./handleMongooseError";
+import HttpError from "./HttpError";
+import ctrlWrapper from "./ctrlWrapper";
 
-module.exports = {
+const utils = {
   handleMongooseError,
+  HttpError,
+  ctrlWrapper,
 };
+
+export default utils;
