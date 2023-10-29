@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/server.js",
-    "build": "rimraf ./dist && tsc",
+    "build": "npm install && tsc && rimraf ./dist",
     "start:dev": "npx nodemon dist/server.js"
   },
   "keywords": [],

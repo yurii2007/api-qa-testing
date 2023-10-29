@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 import authRouter from "./routes/api/auth";
+import testsRouter from "./routes/api/tests";
 
 type ServerError = {
   status?: number;
@@ -20,6 +21,7 @@ app.use(express.static("public"));
 app.use(cookieParser(process.env.JWT_KEY));
 
 app.use("/api/auth", authRouter);
+app.use("/api/tests", testsRouter);
 
 app.use((_: any, res: Response) => {
   res.status(404).json({ message: "Not Found" });
