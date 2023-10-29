@@ -16,7 +16,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
       next(utils.HttpError(401, "Unauthorized"));
     }
 
-    res.cookie("token", id, { signed: true, maxAge: Date.now() + 3600000 });
+    res.cookie("token", token, { maxAge: Date.now() + 3600000 });
     next();
   } catch (error) {
     next(utils.HttpError(401, "Unauthorized"));

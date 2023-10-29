@@ -1,6 +1,6 @@
 import type { TypedRequestBody } from "../app.types";
 import { Response, Request } from "express";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 
 import bcrypt from "bcrypt";
 const { v4: uuidv4 } = require("uuid");
@@ -45,21 +45,24 @@ const login = async (
   const isPasswordsMatch = await bcrypt.compare(user.password, password);
   // if (!isPasswordsMatch) throw handlers.HttpError(401, "Email or password is wrong");
 
-  const token = sign({ id: user._id }, process.env.JWT_KEY || "", { expiresIn: "12h" });
-  await User.findByIdAndUpdate(user._id, { token });
+  const JWT_token = sign({ id: user._id }, process.env.JWT_KEY || "", {
+    expiresIn: "12h",
+  });
+  await User.findByIdAndUpdate(user._id, { token: JWT_token });
 
   res
-    .cookie("token", user.token)
+    .cookie("token", JWT_token)
     .status(200)
     .json({
       message: "Successfully logged in",
       data: { username: user.username, email: user.email, avatarURL: user.avatarURL },
-      token: user.token,
+      token: JWT_token,
     });
 };
 
 const logout = async (req: Request, res: Response) => {
-  const id = req.signedCookies["token"];
+  const token = req.cookies["token"];
+  const { id } = verify(token, process.env.JWT_KEY || "") as any;
   const user = await User.findById(id);
   if (!user) throw handlers.HttpError(401, "Unauthorized");
 

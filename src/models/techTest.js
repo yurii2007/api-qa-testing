@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
+
 import utils from "../utils";
 
-const testSchema = new Schema({
+export const testSchema = new Schema({
   question: String,
   questionId: Number,
   answers: Array,
@@ -10,6 +11,6 @@ const testSchema = new Schema({
 
 testSchema.post("save", utils.handleMongooseError);
 
-const Test = model("test", testSchema);
+const TechTest = model("tech-question", testSchema);
 
-export default Test;
+export default TechTest;
