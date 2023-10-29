@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-// const Joi = require("joi")
 import utils from "../utils";
 
 const userSchema = new Schema(
