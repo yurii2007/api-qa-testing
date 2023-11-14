@@ -325,7 +325,6 @@ FodyWeavers.xsd
 /coverage
 
 # production
-/build
 /dist
 
 # misc
