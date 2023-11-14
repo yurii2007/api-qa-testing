@@ -1,9 +1,16 @@
+import Header from "../ui/header";
+
+import { unAuthLinks } from "../lib/links";
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
-      <div>Layout auth</div>
-      <div>{children}</div>
-    </div>
+    <>
+      <Header links={unAuthLinks} />
+      <div>
+        <div>Layout auth</div>
+        <div>{children}</div>
+      </div>
+    </>
   );
 };
 
