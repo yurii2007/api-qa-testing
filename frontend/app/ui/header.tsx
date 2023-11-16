@@ -1,44 +1,31 @@
-"use client";
+import Image from "next/image";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
+import Logo from "@/public/svg/logo.svg";
+import Burger from "@/public/svg/burger_menu.svg";
+// import Nav from "./nav";
 
-const Header = () => {
-  const pathname = usePathname();
+import { link } from "../lib/definitions";
 
+const Header = ({ links }: { links: link[] }) => {
+  const qwe = links;
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link
-              href="/auth/login"
-              className={clsx({ "m-4": pathname === "/auth/login" })}
-            >
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link href="/auth/register">Register</Link>
-          </li>
-          <li>
-            <Link href="/test">Test</Link>
-          </li>
-          <li>
-            <Link href="/useful-info">Useful info</Link>
-          </li>
-          <li>
-            <Link href="/result">Result</Link>
-          </li>
-          <li>
-            <Link href="/devs">Devs info</Link>
-          </li>
-        </ul>
-      </nav>
+    <header className="p-5 flex justify-between items-center border-b border-b-borders-primary ">
+      <div className="border-r borders-primary">
+        <Image
+          priority
+          src={Logo}
+          alt="Logo"
+          className="w-[129px] h-[28px] cursor-pointer"
+        />
+      </div>
+      <div className="pl-5 border-l border-l-borders-primary">
+        <Image
+          src={Burger}
+          alt="Navigation menu icon"
+          className="w-[20px] h-[20px] cursor-pointer"
+        />
+      </div>
+      {/* <Nav links={links} /> */}
     </header>
   );
 };
