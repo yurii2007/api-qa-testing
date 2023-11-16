@@ -14,6 +14,8 @@ type RegisterBody = {
   username: string;
 };
 
+// handling user registration
+
 const register = async (req: TypedRequestBody<RegisterBody>, res: Response) => {
   const { email, password, username } = req.body;
   const user = await User.findOne({ email });
@@ -33,6 +35,8 @@ const register = async (req: TypedRequestBody<RegisterBody>, res: Response) => {
     .json({ message: "User created successfully", data: { username, email } });
 };
 
+// handling user login
+
 const login = async (
   req: TypedRequestBody<Pick<RegisterBody, "email" | "password">>,
   res: Response
@@ -43,7 +47,7 @@ const login = async (
   // if (!user.verified) throw handlers.HttpError(401, "Confirm your email first");
 
   const isPasswordsMatch = await bcrypt.compare(user.password, password);
-  // if (!isPasswordsMatch) throw handlers.HttpError(401, "Email or password is wrong");
+  if (!isPasswordsMatch) throw handlers.HttpError(401, "Email or password is wrong");
 
   const JWT_token = sign({ id: user._id }, process.env.JWT_KEY || "", {
     expiresIn: "12h",
@@ -60,6 +64,8 @@ const login = async (
     });
 };
 
+// handling user logout
+
 const logout = async (req: Request, res: Response) => {
   const token = req.cookies["token"];
   const { id } = verify(token, process.env.JWT_KEY || "") as any;
@@ -71,10 +77,18 @@ const logout = async (req: Request, res: Response) => {
   res.status(204).json({ message: "Successfully logged out" });
 };
 
+// handling redirect route after google auth
+
+const googleRedirect = async (req: TypedRequestBody<RegisterBody>, res: Response) => {
+  const userInfo = JSON.stringify(req.user);
+  res.status(201).send(userInfo);
+};
+
 const authHandlers = {
   register: handlers.ctrlWrapper(register),
   login: handlers.ctrlWrapper(login),
   logout: handlers.ctrlWrapper(logout),
+  redirect: handlers.ctrlWrapper(googleRedirect),
 };
 
 export default authHandlers;
