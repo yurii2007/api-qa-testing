@@ -4,6 +4,8 @@ import { NextFunction, Request, Response } from "express";
 import User from "../models/user";
 import utils from "../utils";
 
+// checking for auth user with jwt token
+
 const auth = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
