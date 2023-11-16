@@ -8,12 +8,12 @@ import utils from "../../utils";
 import authHandlers from "../../controllers/auth";
 import middlewares from "../../middlewares";
 
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
+const { GOOGLE_CLIENTID, GOOGLE_CLIENT_SECRET } = process.env;
 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: GOOGLE_CLIENT_ID,
+      clientID: GOOGLE_CLIENTID,
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: "https://qa-testing-y6ws.onrender.com/api/auth/google/callback",
     },
