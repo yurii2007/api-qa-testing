@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from "passport";
 
