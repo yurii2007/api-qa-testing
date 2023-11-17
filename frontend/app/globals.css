@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .input-auth {
+    @apply p-5 border border-form-borders placeholder:text-form-primary-text placeholder:font-medium placeholder:text-sm focus-visible:outline-none focus-visible:border-font-primary;
+  };
+  .primary-btn {
+    @apply p-6 text-center font-bold text-[0.625rem] uppercase cursor-pointer transition
+  }
+}

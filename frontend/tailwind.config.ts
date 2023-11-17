@@ -13,6 +13,8 @@ const config: Config = {
         "borders-primary": "#E2E3E5",
         "font-secondary": "#555555",
         "font-primary": "#000000",
+        "form-borders": "#CED2D1",
+        "form-primary-text": "#BBBBBB",
       },
     },
   },

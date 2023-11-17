@@ -1,7 +1,6 @@
 "use client";
 
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
 import { authReducer } from "./authReducer/authSlice";
 import type { User } from "../constants/definitions";
 
@@ -31,6 +30,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   any,
   Action
 >;
-
-// export an assembled wrapper
-export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });
