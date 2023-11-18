@@ -68,7 +68,7 @@ const AuthForm = () => {
       <div className="flex flex-row justify-between">
         <button
           type="submit"
-          className="primary-btn bg-[#FF6B09] text-white hover:bg-transparent border-transparent border hover:border-form-borders hover:text-font-primary"
+          className="primary-btn bg-btn-primary text-white hover:bg-transparent border-transparent border hover:border-form-borders hover:text-font-primary"
         >
           sign in
         </button>

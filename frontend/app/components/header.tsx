@@ -2,14 +2,17 @@ import Image from "next/image";
 
 import Logo from "@/public/svg/logo.svg";
 import Burger from "@/public/svg/burger_menu.svg";
-// import Nav from "./nav";
+import Nav from "./nav";
 
 import { link } from "../lib/constants/definitions";
 
 const Header = ({ links }: { links: link[] }) => {
   const qwe = links;
   return (
-    <header className="px-5 flex justify-between items-center border-b border-b-borders-primary ">
+    <header
+      className="px-5 flex justify-between items-center border-b border-b-borders-primary
+     md:px-8 xl:px-4 md:py-5 xl:py-6"
+    >
       <div className="">
         <Image
           priority
@@ -18,14 +21,14 @@ const Header = ({ links }: { links: link[] }) => {
           className="w-[129px] h-[28px] cursor-pointer"
         />
       </div>
-      <div className="pl-5 py-5 border-l border-l-borders-primary">
+      <div className="pl-5 py-5 border-l border-l-borders-primary md:hidden">
         <Image
           src={Burger}
           alt="Navigation menu icon"
           className="w-[20px] h-[20px] cursor-pointer"
         />
       </div>
-      {/* <Nav links={links} /> */}
+      <Nav links={links} />
     </header>
   );
 };

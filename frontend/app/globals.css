@@ -5,8 +5,12 @@
 @layer components {
   .input-auth {
     @apply p-5 border border-form-borders placeholder:text-form-primary-text placeholder:font-medium placeholder:text-sm focus-visible:outline-none focus-visible:border-font-primary;
-  };
+  }
   .primary-btn {
-    @apply p-6 text-center font-bold text-[0.625rem] uppercase cursor-pointer transition
+    @apply p-6 text-center font-bold text-[0.625rem] uppercase cursor-pointer transition;
+  }
+  .home-link {
+    @apply pt-[3.75rem] pb-10 flex flex-col justify-center items-center gap-7 text-2xl font-extrabold leading-7 tracking-wide
+    text-center text-white; 
   }
 }

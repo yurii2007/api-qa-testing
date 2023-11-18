@@ -15,6 +15,8 @@ const config: Config = {
         "font-primary": "#000000",
         "form-borders": "#CED2D1",
         "form-primary-text": "#BBBBBB",
+        "btn-primary": "#FF6B09",
+        "btn-secondary": "#00122F"
       },
     },
   },
