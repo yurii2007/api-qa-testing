@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice } from "@reduxjs/toolkit";
-import { register } from "./operations";
+import { login, register } from "./operations";
 
 const initialState = {
   user: {
@@ -30,7 +30,20 @@ export const authSlice = createSlice({
           avatarURL: payload.avatarURL,
         };
         state.token = payload.accessToken;
-      });
+      })
+      .addCase(register.rejected, () => initialState)
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.user = {
+          username: payload.username,
+          email: payload.email,
+          avatarURL: payload.avatarURL,
+        };
+        state.token = payload.accessToken;
+      })
+      .addCase(login.rejected, () => initialState);
   },
 });
 
