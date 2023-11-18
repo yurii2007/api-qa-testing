@@ -1,12 +1,12 @@
 import type { TypedRequestBody } from "../app.types";
 import { Response, Request } from "express";
-import { sign, verify } from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
 
 import bcrypt from "bcrypt";
 const { v4: uuidv4 } = require("uuid");
 
 import User from "../models/user";
-import handlers from "../utils/index";
+import handlers from "../utils";
 
 type RegisterBody = {
   email: string;
@@ -68,13 +68,26 @@ const login = async (
 
 const logout = async (req: Request, res: Response) => {
   const token = req.cookies["token"];
-  const { id } = verify(token, process.env.JWT_KEY || "") as any;
-  const user = await User.findById(id);
-  if (!user) throw handlers.HttpError(401, "Unauthorized");
+  const { _id } = await handlers.getByToken(token, process.env.JWT_KEY || "");
 
-  await User.findByIdAndUpdate(id, { token: "" });
+  await User.findByIdAndUpdate(_id, { token: "" });
   res.clearCookie("token");
   res.status(204).json({ message: "Successfully logged out" });
+};
+
+const getCurrent = async (req: Request, res: Response) => {
+  const token = req.cookies["token"];
+  const { username, email, avatarURL } = await handlers.getByToken(
+    token,
+    process.env.JWT_KEY || ""
+  );
+
+  res.status(200).json({
+    username,
+    email,
+    token,
+    avatarURL,
+  });
 };
 
 // handling redirect route after google auth
@@ -89,6 +102,7 @@ const authHandlers = {
   login: handlers.ctrlWrapper(login),
   logout: handlers.ctrlWrapper(logout),
   redirect: handlers.ctrlWrapper(googleRedirect),
+  current: handlers.ctrlWrapper(getCurrent),
 };
 
 export default authHandlers;

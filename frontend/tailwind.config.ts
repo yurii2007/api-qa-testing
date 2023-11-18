@@ -16,7 +16,9 @@ const config: Config = {
         "form-borders": "#CED2D1",
         "form-primary-text": "#BBBBBB",
         "btn-primary": "#FF6B09",
-        "btn-secondary": "#00122F"
+        "btn-secondary": "#00122F",
+        "main-shadow": "0px 4px 15px 0px #02172A1A",
+        "btn-shadow": "0px 2px 2px 0px #0000001A",
       },
     },
   },

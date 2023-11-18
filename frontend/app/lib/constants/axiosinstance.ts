@@ -4,10 +4,12 @@ const instance = axios.create({
   baseURL: "https://qa-testing-y6ws.onrender.com",
 });
 
+instance.defaults.withCredentials = true;
+
 export const token = (token?: string) => {
   // checking if token was passed in, and deleted it if function was called with zero args
-  if (!token) return (axios.defaults.headers.common.Authorization = "");
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  if (!token) return (instance.defaults.headers.common.Authorization = "");
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-export default instance
+export default instance;

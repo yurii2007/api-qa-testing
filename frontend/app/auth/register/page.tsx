@@ -1,7 +1,7 @@
-const Page = () => {
-  return (
-    <div>register</div>
-  )
-}
+import FormWrapper from "../form_wrapper";
 
-export default Page
+const Page = () => {
+  return <FormWrapper isRegister />;
+};
+
+export default Page;

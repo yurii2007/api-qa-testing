@@ -1,16 +1,7 @@
-"use client";
-
-import AuthForm from "../authForm";
+import FormWrapper from "../form_wrapper";
 
 const Page = () => {
-  return (
-    <>
-      <form action="https://qa-testing-y6ws.onrender.com/api/auth/google" method="get">
-        <button type="submit">google</button>
-      </form>
-      <AuthForm />
-    </>
-  );
+  return <FormWrapper />;
 };
 
 export default Page;
