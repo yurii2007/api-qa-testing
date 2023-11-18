@@ -81,7 +81,7 @@ const logout = async (req: Request, res: Response) => {
 
 const googleRedirect = async (req: TypedRequestBody<RegisterBody>, res: Response) => {
   const userInfo = JSON.stringify(req.user);
-  res.status(201).send(userInfo);
+  res.status(201).send(userInfo).redirect("https://api-qa-testing.vercel.app/auth/login");
 };
 
 const authHandlers = {

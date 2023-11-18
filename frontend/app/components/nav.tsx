@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { link } from "../lib/definitions";
+import type { link } from "../lib/constants/definitions";
 
 const Nav = ({ links }: { links: link[] }) => {
   return (
