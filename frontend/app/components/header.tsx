@@ -7,7 +7,6 @@ import Nav from "./nav";
 import { link } from "../lib/constants/definitions";
 
 const Header = ({ links }: { links: link[] }) => {
-  const qwe = links;
   return (
     <header
       className="px-5 flex justify-between items-center border-b border-b-borders-primary

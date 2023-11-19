@@ -5,7 +5,12 @@ import { authLinks } from "./lib/constants/links";
 import Quote from "./quote";
 import HomeLinks from "./main_links";
 
+import instance from "./lib/constants/axiosinstance";
+
 export default function Home() {
+  console.log(instance.defaults.headers.common.Authorization);
+  console.log('s');
+
   return (
     <>
       <Header links={authLinks} />

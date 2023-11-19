@@ -16,3 +16,15 @@ export interface LoginBody {
   username?: string;
   avatarURL?: string;
 }
+
+export interface IQuestion {
+  question: string;
+  questionId: number;
+  answers: string[];
+  rightAnswer: string;
+}
+
+export interface IAnswer {
+  questionId: number;
+  userAnswer: string;
+}

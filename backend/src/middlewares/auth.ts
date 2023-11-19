@@ -9,7 +9,7 @@ import utils from "../utils";
 const auth = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
-  if (bearer !== "Bearer") throw utils.HttpError(401, "Unauthorized");
+  if (bearer !== "Bearer") next(utils.HttpError(401, "Unauthorized"));
 
   try {
     const { id } = verify(token, process.env.JWT_KEY || "") as any;
