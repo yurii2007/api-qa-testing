@@ -63,6 +63,8 @@ router.post("/login", middlewares.validateBody(utils.schemas.login), authHandler
 
 router.post("/logout", middlewares.auth, authHandlers.logout);
 
-router.get("/current", middlewares.checkCookies, authHandlers.current);
+router.get("/current", middlewares.auth, authHandlers.current);
+
+router.get("/verify/:verificationToken", authHandlers.verifyEmail);
 
 export default router;
