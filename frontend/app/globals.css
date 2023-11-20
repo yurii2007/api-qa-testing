@@ -13,4 +13,7 @@
     @apply pt-[3.75rem] pb-10 flex flex-col justify-center items-center gap-7 text-2xl font-extrabold leading-7 tracking-wide
     text-center text-white;
   }
+  .footer__span {
+    @apply block w-[1px] bg-font-footer h-[14px]
+  }
 }

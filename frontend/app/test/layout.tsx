@@ -7,7 +7,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header links={authLinks} />
-      <main>{children}</main>
+      <main className="py-7 px-5">{children}</main>
     </>
   );
 };

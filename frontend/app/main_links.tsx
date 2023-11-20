@@ -1,15 +1,29 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import Arrow from "@/public/svg/arrow.svg";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { getQuestions } from "@/redux/testsReducer/operations";
 
 const HomeLinks = () => {
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <div className="mx-auto flex flex-col gap-5 mt-10">
-      <Link href="/test" className="home-link bg-btn-secondary">
+      <Link
+        onClick={() => dispatch(getQuestions("tech"))}
+        href="/test"
+        className="home-link bg-btn-secondary"
+      >
         QA technical training
         <Image src={Arrow} alt="arrow" />
       </Link>
-      <Link href="/test" className="home-link bg-btn-primary">
+      <Link
+        onClick={() => dispatch(getQuestions("tech"))}
+        href="/test"
+        className="home-link bg-btn-primary"
+      >
         Testing theory
         <Image src={Arrow} alt="arrow" />
       </Link>
