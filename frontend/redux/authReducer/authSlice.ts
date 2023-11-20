@@ -2,7 +2,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-import { login, register } from "./operations";
+import { getCurrent, login, register } from "./operations";
 
 const initialState = {
   user: {
@@ -13,6 +13,7 @@ const initialState = {
   token: "",
   isLoading: false,
   isRefreshing: false,
+  isAuth: false,
 };
 
 export const authSlice = createSlice({
@@ -30,7 +31,7 @@ export const authSlice = createSlice({
           email: payload.email,
           avatarURL: payload.avatarURL,
         };
-        state.token = payload.accessToken;
+        state.token = payload.token;
       })
       .addCase(register.rejected, () => initialState)
       .addCase(login.pending, (state) => {
@@ -38,13 +39,23 @@ export const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, { payload }) => {
         state.user = {
+          username: payload.data.username,
+          email: payload.data.email,
+          avatarURL: payload.data.avatarURL,
+        };
+        state.token = payload.token;
+        state.isAuth = true;
+      })
+      .addCase(login.rejected, () => initialState)
+      .addCase(getCurrent.fulfilled, (state, { payload }) => {
+        state.user = {
           username: payload.username,
           email: payload.email,
           avatarURL: payload.avatarURL,
         };
-        state.token = payload.accessToken;
-      })
-      .addCase(login.rejected, () => initialState);
+        state.token = payload.token;
+        state.isAuth = true;
+      });
   },
 });
 

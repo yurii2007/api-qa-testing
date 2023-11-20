@@ -1,5 +1,7 @@
+import PublicRoute from "../components/publicRoute";
+
 const Page = () => {
-  return <></>;
+  return <PublicRoute>{}</PublicRoute>;
 };
 
 export default Page;

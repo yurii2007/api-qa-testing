@@ -2,7 +2,7 @@ import { NextComponentType } from "next";
 import { useSelector } from "react-redux";
 import { redirect } from "next/navigation";
 
-import { selectIsAuth } from "../redux/selectors";
+import { selectIsAuth } from "@/redux/selectors";
 
 const privateRoute = (Component: NextComponentType) => {
   const Auth = (props: any) => {

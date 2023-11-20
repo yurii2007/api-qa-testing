@@ -2,7 +2,7 @@ import { NextComponentType } from "next";
 import { useSelector } from "react-redux";
 import { redirect } from "next/navigation";
 
-import { selectIsLoggedIn } from "../redux/selectors";
+import { selectIsLoggedIn } from "@/redux/selectors";
 
 const publicRoute = (Component: NextComponentType) => {
   const Auth = (props: any) => {

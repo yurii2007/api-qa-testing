@@ -1,10 +1,10 @@
 "use client";
 
-import type { LoginBody } from "../../constants/definitions";
+import type { LoginBody } from "@/app/lib/constants/definitions";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import instance, { token } from "../../constants/axiosinstance";
+import instance, { token } from "@/app/lib/constants/axiosinstance";
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -34,10 +34,14 @@ export const login = createAsyncThunk(
 
 export const getCurrent = createAsyncThunk("auth/current", async (_, thunkAPI) => {
   const state: any = await thunkAPI.getState();
+  
+  if (!state.auth.token) return thunkAPI.rejectWithValue("Unauthorized");
+
   try {
+    token(state.auth.token);
     const { data } = await instance.get("/api/auth/current", {
       headers: {
-        Cookie: `token=${state.user.token}`,
+        Cookie: `token=${state.auth.token}`,
       },
     });
     return data;

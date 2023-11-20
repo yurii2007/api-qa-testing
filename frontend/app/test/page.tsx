@@ -1,15 +1,16 @@
 "use client";
 
 import { useDispatch } from "react-redux";
-import { getQuestions } from "../lib/redux/testsReducer/operations";
-import { AppDispatch } from "../lib/redux/store";
+import { getQuestions } from "@/redux/testsReducer/operations";
+import { AppDispatch } from "@/redux/store";
+import ProtectedRoute from "../components/protectedRoute";
 
 const Page = () => {
   const dispatch = useDispatch<AppDispatch>();
   return (
-    <div>
+    <ProtectedRoute>
       <button onClick={() => dispatch(getQuestions("tech"))}>qwe</button>
-    </div>
+    </ProtectedRoute>
   );
 };
 
