@@ -19,6 +19,8 @@ const config: Config = {
         "btn-secondary": "#00122F",
         "main-shadow": "0px 4px 15px 0px #02172A1A",
         "btn-shadow": "0px 2px 2px 0px #0000001A",
+        "bg-footer": "#02172A",
+        "font-footer": "#FFFFFF66",
       },
     },
   },
