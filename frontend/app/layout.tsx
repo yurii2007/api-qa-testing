@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import montserrat from "./fonts";
-import Providers from "./lib/redux/provider";
+import ReduxProvider from "@/redux/provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${montserrat.className} subpixel-antialiased bg-bg-primary`}>
-        <Providers>{children}</Providers>
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );

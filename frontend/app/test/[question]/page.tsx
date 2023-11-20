@@ -1,5 +1,7 @@
+import ProtectedRoute from "@/app/components/protectedRoute";
+
 const Question = () => {
-  return <div>Question</div>;
+  return <ProtectedRoute>Question</ProtectedRoute>;
 };
 
 export default Question;

@@ -4,8 +4,8 @@ import { useFormik } from "formik";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 
-import { login, register } from "../lib/redux/authReducer/operations";
-import { AppDispatch } from "../lib/redux/store";
+import { login, register } from "@/redux/authReducer/operations";
+import { AppDispatch } from "@/redux/store";
 
 interface SubmittedValues {
   email: string;

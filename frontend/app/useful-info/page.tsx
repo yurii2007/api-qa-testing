@@ -1,5 +1,7 @@
+import ProtectedRoute from "../components/protectedRoute";
+
 const Page = () => {
-  return <div>useful info</div>;
+  return <ProtectedRoute>useful info</ProtectedRoute>;
 };
 
 export default Page;
