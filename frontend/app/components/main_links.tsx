@@ -10,7 +10,7 @@ import { getQuestions } from "@/redux/testsReducer/operations";
 const HomeLinks = () => {
   const dispatch = useDispatch<AppDispatch>();
   return (
-    <div className="mx-auto flex flex-col gap-5 mt-10">
+    <div className="mx-auto flex flex-col gap-5 mt-10 md:items-center xl:flex-row xl:gap-8 xl:justify-center">
       <Link
         onClick={() => dispatch(getQuestions("tech"))}
         href="/test"
@@ -22,7 +22,7 @@ const HomeLinks = () => {
       <Link
         onClick={() => dispatch(getQuestions("tech"))}
         href="/test"
-        className="home-link bg-btn-primary"
+        className="home-link bg-btn-primary xl:px-32"
       >
         Testing theory
         <Image src={Arrow} alt="arrow" />

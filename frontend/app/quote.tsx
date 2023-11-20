@@ -8,7 +8,7 @@ const Quote = () => {
         &ldquo;Regression testing. What is it? If the system compiles, that&apos;s good, if it
         boots, that&apos;s great!&rdquo;
       </p>
-      <div className="w-32 md:w-80 h-[1px] mt-8 bg-btn-secondary mx-auto opacity-[0.15]"></div>
+      <div className="divider"></div>
       <p className="mt-3 text-center text-xs leading-[0.875rem] tracking-wide font-medium text-font-primary md:text-lg md:leading-6">
         Linus Torvalds
       </p>

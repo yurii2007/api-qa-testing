@@ -4,7 +4,7 @@ import ProtectedRoute from "./components/protectedRoute";
 
 import { authLinks } from "./lib/constants/links";
 import Quote from "./quote";
-import HomeLinks from "./main_links";
+import HomeLinks from "./components/main_links";
 
 export default function Home() {
   return (
