@@ -1,35 +1,53 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
+import Image from "next/image";
+import { useMediaQuery } from "react-responsive";
+import { motion } from "framer-motion";
 
-import type { link } from "../lib/constants/definitions";
+import burger from "@/public/svg/burger_menu.svg";
+import close from "@/public/svg/close.svg";
+import LinkList from "./link_list";
+import { AnimatePresence } from "framer-motion";
 
-const Nav = ({ links }: { links: link[] }) => {
-  const path = usePathname();
+const Nav = ({
+  isOpenNav,
+  openNav,
+}: {
+  isOpenNav: boolean;
+  openNav: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" });
 
   return (
-    <nav className="hidden md:flex">
-      <ul>
-        {links.map((link) => (
-          <li key={link.name} className="relative group">
-            <Link
-              href={link.path}
-              className="font-medium text-sm leading-4 text-right tracking-wide"
-            >
-              {link.name}
-            </Link>
-            <span
-              className={clsx(
-                "hidden absolute bottom-0 w-full h-[1px] bg-btn-primary group-hover:block",
-                { block: link.path === path }
-              )}
-            ></span>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <>
+      <div
+        onClick={() => openNav((prevState) => !prevState)}
+        className="pl-5 py-5 border-l border-l-borders-primary md:hidden"
+      >
+        <Image
+          src={isOpenNav ? close : burger}
+          alt="Navigation menu icon"
+          className="w-[20px] h-[20px] cursor-pointer"
+        />
+      </div>
+      <AnimatePresence>
+        {isBigScreen ? (
+          <nav className="nav">
+            <LinkList />
+          </nav>
+        ) : isOpenNav ? (
+          <motion.nav
+            initial={{ y: "-100%", opacity: 0.5 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "-100%", opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="nav absolute top-[61px] left-0 w-screen bg-bg-primary h-[calc(100vh-61px)] items-start justify-center z-10"
+          >
+            <LinkList />
+          </motion.nav>
+        ) : null}
+      </AnimatePresence>
+    </>
   );
 };
 

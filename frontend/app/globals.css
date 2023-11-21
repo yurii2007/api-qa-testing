@@ -19,4 +19,7 @@
   .divider {
     @apply w-32 md:w-80 h-[1px] mt-8 bg-btn-secondary mx-auto opacity-[0.15];
   }
+  .nav {
+    @apply text-sm font-medium leading-4 tracking-wide text-center text-font-primary flex md:text-xs md:text-left;
+  }
 }
