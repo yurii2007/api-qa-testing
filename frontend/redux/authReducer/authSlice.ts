@@ -16,15 +16,18 @@ const initialState = {
   isAuth: false,
 };
 
+const rejectedAuth = () => initialState;
+const pendingAuth = (state: any) => {
+  state.isLoading = true;
+};
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(register.pending, (state) => {
-        state.isLoading = true;
-      })
+      .addCase(register.pending, pendingAuth)
       .addCase(register.fulfilled, (state, { payload }) => {
         state.user = {
           username: payload.username,
@@ -33,10 +36,8 @@ export const authSlice = createSlice({
         };
         state.token = payload.token;
       })
-      .addCase(register.rejected, () => initialState)
-      .addCase(login.pending, (state) => {
-        state.isLoading = true;
-      })
+      .addCase(register.rejected, rejectedAuth)
+      .addCase(login.pending, pendingAuth)
       .addCase(login.fulfilled, (state, { payload }) => {
         state.user = {
           username: payload.data.username,
@@ -46,7 +47,7 @@ export const authSlice = createSlice({
         state.token = payload.token;
         state.isAuth = true;
       })
-      .addCase(login.rejected, () => initialState)
+      .addCase(login.rejected, rejectedAuth)
       .addCase(getCurrent.fulfilled, (state, { payload }) => {
         state.user = {
           username: payload.username,
@@ -55,7 +56,9 @@ export const authSlice = createSlice({
         };
         state.token = payload.token;
         state.isAuth = true;
-      });
+      })
+      .addCase(getCurrent.rejected, rejectedAuth)
+      .addCase(getCurrent.pending, pendingAuth);
   },
 });
 

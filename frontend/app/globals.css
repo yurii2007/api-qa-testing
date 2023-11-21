@@ -11,9 +11,15 @@
   }
   .home-link {
     @apply pt-[3.75rem] pb-10 flex flex-col justify-center items-center gap-7 text-2xl font-extrabold leading-7 tracking-wide
-    text-center text-white;
+    text-center text-white md:w-[400px] md:text-[2.125rem] md:leading-10;
   }
   .footer__span {
-    @apply block w-[1px] bg-font-footer h-[14px]
+    @apply block w-[1px] bg-font-footer h-[14px];
+  }
+  .divider {
+    @apply w-32 md:w-80 h-[1px] mt-8 bg-btn-secondary mx-auto opacity-[0.15];
+  }
+  .nav {
+    @apply text-sm font-medium leading-4 tracking-wide text-center text-font-primary flex md:text-xs md:text-left;
   }
 }

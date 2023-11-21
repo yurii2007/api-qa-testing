@@ -102,9 +102,11 @@ const getCurrent = async (req: Request, res: Response) => {
 
 // handling redirect route after google auth
 
-const googleRedirect = async (req: TypedRequestBody<RegisterBody>, res: Response) => {
-  const userInfo = JSON.stringify(req.user);
-  res.status(201).send(userInfo).redirect("https://api-qa-testing.vercel.app/auth/login");
+const googleRedirect = async (req: TypedRequestBody<any>, res: Response) => {
+  const user = await User.findOne({ email: req.body.emails[0].value });
+  res
+    .status(201)
+    .redirect(`https://api-qa-testing.vercel.app/auth/login?token=${user?.token}`);
 };
 
 // handling verifying email
