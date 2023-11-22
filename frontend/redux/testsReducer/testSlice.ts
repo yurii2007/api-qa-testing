@@ -1,7 +1,7 @@
 "use client";
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getQuestions } from "./operations";
+import { addAnswer, getQuestions } from "./operations";
 import { IAnswer, IQuestion } from "@/app/lib/constants/definitions";
 
 interface ITestState {
@@ -31,6 +31,16 @@ export const testSlice = createSlice({
       })
       .addCase(getQuestions.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(addAnswer, (state, { payload: { answer } }) => {
+        const prevAnswer = state.answers.findIndex(
+          (el) => el.questionId === answer.questionId
+        );
+        if (prevAnswer !== -1) {
+          state.answers[prevAnswer] = answer;
+        } else {
+          state.answers.push(answer);
+        }
       });
   },
 });
