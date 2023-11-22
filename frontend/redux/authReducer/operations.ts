@@ -2,7 +2,7 @@
 
 import type { LoginBody } from "@/app/lib/constants/definitions";
 
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 
 import instance, { token } from "@/app/lib/constants/axiosinstance";
 
@@ -34,7 +34,7 @@ export const login = createAsyncThunk(
 
 export const getCurrent = createAsyncThunk("auth/current", async (_, thunkAPI) => {
   const state: any = await thunkAPI.getState();
-  
+
   if (!state.auth.token) return thunkAPI.rejectWithValue("Unauthorized");
 
   try {
@@ -49,3 +49,7 @@ export const getCurrent = createAsyncThunk("auth/current", async (_, thunkAPI) =
     thunkAPI.rejectWithValue(error);
   }
 });
+
+export const setToken = createAction("auth/setToken", (token: string) => ({
+  payload: { token },
+}));
