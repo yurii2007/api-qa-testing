@@ -32,6 +32,20 @@ export const login = createAsyncThunk(
   }
 );
 
+export const logout = createAsyncThunk("auth/logout", async (credentials, thunkAPI) => {
+  const state: any = await thunkAPI.getState();
+
+  if (!state.auth.token) return thunkAPI.rejectWithValue("Unauthorized");
+
+  try {
+    token(state.auth.token);
+    const { data } = await instance.post("/api/auth/logout");
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 export const getCurrent = createAsyncThunk("auth/current", async (_, thunkAPI) => {
   const state: any = await thunkAPI.getState();
 
@@ -39,11 +53,7 @@ export const getCurrent = createAsyncThunk("auth/current", async (_, thunkAPI) =
 
   try {
     token(state.auth.token);
-    const { data } = await instance.get("/api/auth/current", {
-      headers: {
-        Cookie: `token=${state.auth.token}`,
-      },
-    });
+    const { data } = await instance.get("/api/auth/current");
     return data;
   } catch (error) {
     thunkAPI.rejectWithValue(error);

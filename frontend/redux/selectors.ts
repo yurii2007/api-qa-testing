@@ -17,6 +17,8 @@ export const selectIsAuthenticate = createSelector(
 
 const selectIsAuthLoading = (state: RootState) => state.auth.isLoading;
 
+export const selectUser = (state: RootState) => state.auth.user;
+
 // Tests selectors
 
 export const selectQuestions = (state: RootState) => state.tests.questions;

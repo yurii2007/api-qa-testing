@@ -1,6 +1,13 @@
-import { IQuestion } from "@/app/lib/constants/definitions";
+"use client";
+
+import type { IQuestion } from "@/app/lib/constants/definitions";
+import type { AppDispatch } from "@/redux/store";
+import { addAnswer } from "@/redux/testsReducer/operations";
+
+import { useDispatch } from "react-redux";
 
 const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) => {
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <form className="w-72 py-10 px-5 shadow-main-shadow bg-white">
       <p className="text-font-secondary text-center uppercase text-[0.625rem] font-bold leading-3 tracking-wide">
@@ -22,6 +29,13 @@ const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) =
                 id={answer}
                 name={`answer${idx}`}
                 className="w-[18px] h-[18px] border rounded-full"
+                onChange={(e) =>
+                  e.target.checked
+                    ? dispatch(
+                        addAnswer({ questionId: question.questionId, userAnswer: answer })
+                      )
+                    : null
+                }
               />
               <label htmlFor={answer}>{answer}</label>
             </li>

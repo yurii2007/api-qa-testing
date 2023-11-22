@@ -4,13 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 
 import { selectIsAuthenticate } from "@/redux/selectors";
 import { authLinks, unAuthLinks } from "../lib/constants/links";
+import SignOut from "./signOut";
 
 const LinkList = ({ openNav }: { openNav?: () => void }) => {
   const path = usePathname();
   const isAuth = useSelector(selectIsAuthenticate);
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 767.9px)" });
   const links = isAuth ? authLinks : unAuthLinks;
 
   return (
@@ -25,12 +28,13 @@ const LinkList = ({ openNav }: { openNav?: () => void }) => {
             <span
               className={clsx(
                 `hidden absolute bottom-0 left-0 w-full h-[1px] bg-btn-primary group-hover:block`,
-                { block: link.path === path }
+                { "block": link.path === path }
               )}
             ></span>
           </Link>
         </li>
       ))}
+      {isSmallScreen ? <SignOut /> : null}
     </ul>
   );
 };
