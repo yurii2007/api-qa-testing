@@ -15,7 +15,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="ml-auto mr-5 md:mr-0 md:ml-0 md:flex items-center gap-2">
+      <div className="ml-auto mr-5 md:flex md:ml-0 items-center gap-2">
         <Image
           src={user.avatarURL}
           width={30}

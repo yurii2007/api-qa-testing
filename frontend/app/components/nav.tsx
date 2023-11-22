@@ -35,7 +35,7 @@ const Nav = ({
       </div>
       <AnimatePresence>
         {isBigScreen ? (
-          <nav className="header-text">
+          <nav className="header-text ml-auto mr-10 xl:mr-20">
             <LinkList />
           </nav>
         ) : isOpenNav ? (

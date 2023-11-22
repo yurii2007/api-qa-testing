@@ -10,7 +10,7 @@ const Footer = () => {
         2023 <span className="footer__span"></span> All Rights Reserved
         <span className="footer__span"></span> Developed with
         <Image src={heart} alt="orange heart emoji" className="w-[16px] h-[16px]" />
-        by <a href="#" className="underline">GoIT students</a>
+        by <a href="#" className="underline">GoIT student</a>
       </p>
     </footer>
   );
