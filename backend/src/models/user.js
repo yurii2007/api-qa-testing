@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import utils from "../utils";
+import handleMongooseError from "../utils/handleMongooseError";
 
 const userSchema = new Schema(
   {
@@ -30,7 +30,7 @@ const userSchema = new Schema(
   { versionKey: false }
 );
 
-userSchema.post("save", utils.handleMongooseError);
+userSchema.post("save", handleMongooseError);
 
 const User = model("user", userSchema);
 
