@@ -43,7 +43,7 @@ const Nav = ({
             transition={{ duration: 0.4 }}
             className="nav absolute top-[61px] left-0 w-screen bg-bg-primary h-[calc(100vh-61px)] items-start justify-center z-10"
           >
-            <LinkList />
+            <LinkList openNav={()=>openNav(false)} />
           </motion.nav>
         ) : null}
       </AnimatePresence>

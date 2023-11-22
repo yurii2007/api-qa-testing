@@ -1,9 +1,7 @@
 import express from "express";
 import passport from "passport";
-import bcrypt from "bcrypt";
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-import User from "../../models/user";
 import utils from "../../utils";
 import authHandlers from "../../controllers/auth";
 import middlewares from "../../middlewares";
@@ -19,20 +17,12 @@ passport.use(
     },
     async (accessToken: any, refreshToken: any, profile: any, cb: any) => {
       //checking on existing user
-      const isExist = await User.findOne({ email: profile.emails[0].value });
-      if (isExist) throw utils.HttpError(409, "User with this email already exist");
-
-      const hashPassword = await bcrypt.hash(profile.id, 10);
-
-      await User.create({
-        username: profile.name.givenName,
-        email: profile.emails[0].value,
-        password: hashPassword,
-        avatarURL: profile.photos[0].value ?? "https://example.com/avatar.jpg",
-        token: refreshToken,
-        verificationToken: accessToken,
-      });
-      return cb(null, profile);
+      try {
+        const token = await utils.redirectGoogleUser(profile);
+        return cb(null, token);
+      } catch (error: any) {
+        return cb(null, error.message);
+      }
     }
   )
 );

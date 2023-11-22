@@ -4,6 +4,7 @@ import ctrlWrapper from "./ctrlWrapper";
 import schemas from "./schemas";
 import getByToken from "./getUserbyToken";
 import sendEmail from "./sendMail";
+import redirectGoogleUser from "./redirectGoogleUser";
 
 const utils = {
   handleMongooseError,
@@ -12,6 +13,7 @@ const utils = {
   schemas,
   getByToken,
   sendEmail,
+  redirectGoogleUser
 };
 
 export default utils;
