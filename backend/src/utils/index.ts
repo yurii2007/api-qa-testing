@@ -5,6 +5,7 @@ import schemas from "./schemas";
 import getByToken from "./getUserbyToken";
 import sendEmail from "./sendMail";
 import redirectGoogleUser from "./redirectGoogleUser";
+import getFinalResult from "./getFinalResult";
 
 const utils = {
   handleMongooseError,
@@ -13,7 +14,8 @@ const utils = {
   schemas,
   getByToken,
   sendEmail,
-  redirectGoogleUser
+  redirectGoogleUser,
+  getFinalResult
 };
 
 export default utils;
