@@ -1,12 +1,15 @@
 "use client";
 
-import type { IQuestion } from "../../lib/constants/definitions";
+import type { IQuestion } from "@/constants/definitions";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
-import { questionAnimation } from "../../lib/constants/animation";
+import { questionAnimation } from "@/constants/animation";
 import QuestionForm from "./form";
+import prevArrow from "@/public/svg/prevArrow.svg";
+import nextArrow from "@/public/svg/nextArrow.svg";
 
 const QuestionList = ({ questions }: { questions: IQuestion[] }) => {
   const [[currentPosition, direction], setCurrentPosition] = useState([0, "right"]);
@@ -20,7 +23,7 @@ const QuestionList = ({ questions }: { questions: IQuestion[] }) => {
 
   return (
     <>
-      <ul className="mt-[1.125rem] flex gap-6 transition-transform">
+      <ul className="mt-[1.125rem] flex gap-6 transition-transform justify-center">
         <AnimatePresence initial={false} custom={direction}>
           <motion.li
             key={currentPosition}
@@ -37,20 +40,24 @@ const QuestionList = ({ questions }: { questions: IQuestion[] }) => {
           </motion.li>
         </AnimatePresence>
       </ul>
-      <div className="flex justify-between">
+      <div className="flex justify-between mt-5">
         <button
           onClick={() => changePosition("left")}
+          className="tests__btn bg-btn-primary disabled:opacity-70 gap-3 justify-start text-white"
           disabled={currentPosition === 0}
           type="button"
         >
-          prev
+          <Image src={prevArrow} width={24} height={24} alt="left-side arrow" />
+          <p className="hidden md:block font-medium">Previous question</p>
         </button>
         <button
           onClick={() => changePosition("right")}
+          className="tests__btn bg-white disabled:opacity-70 justify-between text-font-primary"
           disabled={currentPosition === 11}
           type="button"
         >
-          next
+          <p className="hidden md:block font-medium">Next question</p>
+          <Image src={nextArrow} width={24} height={24} alt="right-side arrow" />
         </button>
       </div>
     </>

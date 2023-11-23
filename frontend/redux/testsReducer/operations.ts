@@ -1,11 +1,12 @@
 "use client";
 
-import type { IAnswer } from "@/app/lib/constants/definitions";
+import type { IAnswer } from "@/constants/definitions";
 
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 
-import instance from "@/app/lib/constants/axiosinstance";
+import instance from "@/constants/axiosinstance";
 import { RootState } from "../store";
+import { setToken } from "../authReducer/operations";
 
 export const getQuestions = createAsyncThunk(
   "tests/getQuestions",
@@ -24,8 +25,31 @@ export const getQuestions = createAsyncThunk(
   }
 );
 
+export const getResult = createAsyncThunk("tests/getResult", async (_, thunkAPI) => {
+  const state: any = await thunkAPI.getState();
+  try {
+    setToken(state.auth.token);
+    const { data } = await instance.post("api/tests/result", {
+      type: state.tests.type,
+      answers: state.tests.answers,
+    });
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 export const addAnswer = createAction("tests/answer", (answer: IAnswer) => ({
   payload: {
     answer: answer,
   },
 }));
+
+export const setTypeQuestions = createAction(
+  "tests/setType",
+  (type: "tech" | "theory") => ({
+    payload: {
+      type,
+    },
+  })
+);

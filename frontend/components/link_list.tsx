@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
 import { selectIsAuthenticate } from "@/redux/selectors";
-import { authLinks, unAuthLinks } from "../lib/constants/links";
+import { authLinks, unAuthLinks } from "@/constants/links";
 import SignOut from "./signOut";
 
 const LinkList = ({ openNav }: { openNav?: () => void }) => {

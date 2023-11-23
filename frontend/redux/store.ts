@@ -1,6 +1,6 @@
 "use client";
 
-import type { User } from "@/app/lib/constants/definitions";
+import type { User } from "@/constants/definitions";
 
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import {
