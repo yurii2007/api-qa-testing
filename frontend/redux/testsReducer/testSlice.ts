@@ -2,7 +2,7 @@
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { addAnswer, getQuestions } from "./operations";
-import { IAnswer, IQuestion } from "@/app/lib/constants/definitions";
+import { IAnswer, IQuestion } from "@/constants/definitions";
 
 interface ITestState {
   questions: IQuestion[];

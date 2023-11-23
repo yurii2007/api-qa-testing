@@ -1,10 +1,10 @@
 "use client";
 
-import type { IAnswer } from "@/app/lib/constants/definitions";
+import type { IAnswer } from "@/constants/definitions";
 
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 
-import instance from "@/app/lib/constants/axiosinstance";
+import instance from "@/constants/axiosinstance";
 import { RootState } from "../store";
 
 export const getQuestions = createAsyncThunk(

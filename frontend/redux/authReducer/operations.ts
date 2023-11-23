@@ -1,10 +1,10 @@
 "use client";
 
-import type { LoginBody } from "@/app/lib/constants/definitions";
+import type { LoginBody } from "@/constants/definitions";
 
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 
-import instance, { token } from "@/app/lib/constants/axiosinstance";
+import instance, { token } from "@/constants/axiosinstance";
 
 export const register = createAsyncThunk(
   "auth/register",

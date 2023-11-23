@@ -3,10 +3,10 @@
 import { useSelector } from "react-redux";
 import { selectQuestions } from "@/redux/selectors";
 
-import ProtectedRoute from "../components/protectedRoute";
+import ProtectedRoute from "@/components/protectedRoute";
 
 import QuestionList from "./components/questionlist";
-import HomeLinks from "../components/main_links";
+import HomeLinks from "@/components/main_links";
 
 const Page = () => {
   const questions = useSelector(selectQuestions);
