@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-import utils from "../utils";
+import handleMongooseError from "../utils/handleMongooseError";
 
 export const testSchema = new Schema({
   question: String,
@@ -9,7 +9,7 @@ export const testSchema = new Schema({
   rightAnswer: String,
 });
 
-testSchema.post("save", utils.handleMongooseError);
+testSchema.post("save", handleMongooseError);
 
 const TechTest = model("tech-question", testSchema);
 
