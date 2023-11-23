@@ -32,7 +32,7 @@ export const login = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk("auth/logout", async (credentials, thunkAPI) => {
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   const state: any = await thunkAPI.getState();
 
   if (!state.auth.token) return thunkAPI.rejectWithValue("Unauthorized");

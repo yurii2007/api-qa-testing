@@ -27,6 +27,8 @@ export const selectAnswers = (state: RootState) => state.tests.answers;
 
 const selectIsTestsLoading = (state: RootState) => state.auth.isLoading;
 
+export const selectResult = (state: RootState) => state.tests.result;
+
 // app selectors
 
 export const isLoading = createSelector(

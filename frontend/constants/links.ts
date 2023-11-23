@@ -12,7 +12,10 @@ export const authLinks: link[] = [
   { name: "Contacts", path: "/contacts" },
 ];
 
-export const unAuthLinks: link[] = [{ name: "Contacts", path: "/contacts" }];
+export const unAuthLinks: link[] = [
+  { name: "Login", path: "/auth/login" },
+  { name: "Contacts", path: "/contacts" },
+];
 
 export const socialLinks = [
   { src: githubLogo, link: "https://github.com/yurii2007", alt: "Github icon with link" },

@@ -22,4 +22,7 @@
   .header-text {
     @apply text-sm font-medium leading-4 tracking-wide text-center text-font-primary flex md:text-xs md:text-left;
   }
+  .tests__btn {
+    @apply py-1 px-4 md:text-xs leading-3 tracking-wide text-left md:px-5 md:flex items-center md:w-[210px];
+  }
 }

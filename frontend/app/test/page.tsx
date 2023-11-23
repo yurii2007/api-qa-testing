@@ -1,15 +1,18 @@
 "use client";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectQuestions } from "@/redux/selectors";
 
 import ProtectedRoute from "@/components/protectedRoute";
 
 import QuestionList from "./components/questionlist";
 import HomeLinks from "@/components/main_links";
+import { AppDispatch } from "@/redux/store";
+import { getResult } from "@/redux/testsReducer/operations";
 
 const Page = () => {
   const questions = useSelector(selectQuestions);
+  const dispatch = useDispatch<AppDispatch>();
 
   if (questions.length === 0) {
     return (
@@ -28,6 +31,7 @@ const Page = () => {
           theory_ ]
         </p>
         <button
+          onClick={() => dispatch(getResult())}
           className="primary-btn bg-btn-primary px-10 py-[1.125rem] text-white text-[0.625rem]
            leading-3 tracking-wide text-center font-medium capitalize"
           type="button"

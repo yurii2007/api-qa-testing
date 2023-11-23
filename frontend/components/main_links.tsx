@@ -1,18 +1,24 @@
 "use client";
 
+import type { AppDispatch } from "@/redux/store";
+
 import Image from "next/image";
 import Link from "next/link";
-import Arrow from "@/public/svg/arrow.svg";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
-import { getQuestions } from "@/redux/testsReducer/operations";
+
+import { getQuestions, setTypeQuestions } from "@/redux/testsReducer/operations";
+
+import Arrow from "@/public/svg/arrow.svg";
 
 const HomeLinks = () => {
   const dispatch = useDispatch<AppDispatch>();
   return (
     <div className="mx-auto flex flex-col gap-5 mt-10 md:items-center xl:flex-row xl:gap-8 xl:justify-center">
       <Link
-        onClick={() => dispatch(getQuestions("tech"))}
+        onClick={() => {
+          dispatch(setTypeQuestions("tech"));
+          dispatch(getQuestions("tech"));
+        }}
         href="/test"
         className="home-link bg-btn-secondary"
       >
@@ -20,7 +26,10 @@ const HomeLinks = () => {
         <Image src={Arrow} alt="arrow" />
       </Link>
       <Link
-        onClick={() => dispatch(getQuestions("tech"))}
+        onClick={() => {
+          dispatch(setTypeQuestions("theory"));
+          dispatch(getQuestions("tech"));
+        }}
         href="/test"
         className="home-link bg-btn-primary xl:px-32"
       >
