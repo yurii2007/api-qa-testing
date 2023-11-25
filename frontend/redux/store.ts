@@ -28,12 +28,20 @@ const authPersistSettings = {
   whitelist: ["token"],
 };
 
+const testsPersistSettings = {
+  key: "tests",
+  storage,
+  whitelist: ["result"],
+};
+
 const persistedAuth = persistReducer(authPersistSettings, authReducer);
+
+const persistedTests = persistReducer(testsPersistSettings, testReducer);
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuth,
-    tests: testReducer,
+    tests: persistedTests,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
