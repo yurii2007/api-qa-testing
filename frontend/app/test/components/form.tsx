@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 
 const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) => {
   const dispatch = useDispatch<AppDispatch>();
+
   return (
     <form className="w-72 py-10 px-5 shadow-main-shadow bg-white md:w-[704px] md:pb-14 md:px-20">
       <p className="text-font-secondary text-center uppercase text-[0.625rem] font-bold leading-3 tracking-wide">
@@ -28,7 +29,7 @@ const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) =
                 type="radio"
                 id={answer}
                 name={`answer${idx}`}
-                className="w-[18px] h-[18px] peer rounded-full appearance-none absolute top-0 left-0 z-[1] border border-font-primary "
+                className="w-[18px] h-[18px] peer rounded-full appearance-none absolute top-0 left-0 z-[1] border border-font-primary cursor-pointer"
                 onChange={(e) =>
                   e.target.checked
                     ? dispatch(
@@ -38,7 +39,7 @@ const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) =
                 }
               />
               <span className="absolute top-[4px] left-[4px] p-1 w-[10px] h-[10px] rounded-full peer-checked:bg-btn-primary"></span>
-              <label className="text-font-primary" htmlFor={answer}>
+              <label className="text-font-primary cursor-pointer" htmlFor={answer}>
                 {answer}
               </label>
             </li>

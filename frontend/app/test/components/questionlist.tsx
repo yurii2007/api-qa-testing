@@ -43,21 +43,21 @@ const QuestionList = ({ questions }: { questions: IQuestion[] }) => {
       <div className="flex justify-between mt-5">
         <button
           onClick={() => changePosition("left")}
-          className="tests__btn bg-btn-primary disabled:opacity-70 gap-3 justify-start text-white"
+          className="group tests__btn bg-btn-primary disabled:opacity-70 gap-3 justify-start text-white"
           disabled={currentPosition === 0}
           type="button"
         >
-          <Image src={prevArrow} width={24} height={24} alt="left-side arrow" />
+          <Image src={prevArrow} width={24} height={24} alt="left-side arrow" className="group-hover:group-enabled:-translate-x-2 transition-transform" />
           <p className="hidden md:block font-medium">Previous question</p>
         </button>
         <button
           onClick={() => changePosition("right")}
-          className="tests__btn bg-white disabled:opacity-70 justify-between text-font-primary"
+          className="group tests__btn bg-white disabled:opacity-70 justify-between text-font-primary"
           disabled={currentPosition === 11}
           type="button"
         >
           <p className="hidden md:block font-medium">Next question</p>
-          <Image src={nextArrow} width={24} height={24} alt="right-side arrow" />
+          <Image src={nextArrow} width={24} height={24} alt="right-side arrow" className="group-hover:group-enabled:translate-x-2 transition-transform" />
         </button>
       </div>
     </>

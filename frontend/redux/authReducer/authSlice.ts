@@ -59,10 +59,8 @@ export const authSlice = createSlice({
       })
       .addCase(getCurrent.rejected, rejectedAuth)
       .addCase(getCurrent.pending, pendingAuth)
-      .addCase(logout.fulfilled, (state) => initialState)
-      .addCase(logout.rejected, ()=>{
-        console.log('object');
-      })
+      .addCase(logout.fulfilled, () => initialState)
+      .addCase(logout.rejected, rejectedAuth)
       .addCase(setToken, (state, { payload }) => {
         state.token = payload.token;
       });

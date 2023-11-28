@@ -9,6 +9,7 @@ import { AppDispatch } from "@/redux/store";
 
 const SignOut = () => {
   const dispatch = useDispatch<AppDispatch>();
+
   return (
     <button
       onClick={() => dispatch(logout())}

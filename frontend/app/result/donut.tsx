@@ -35,7 +35,7 @@ const Donut = () => {
   };
 
   return (
-    <section className="mt-5 w-[156px] h-[156px] mx-auto">
+    <section className="mt-5 md:mt-10 w-[156px] md:w-[288px] h-[156px] md:h-[288px] mx-auto">
       <Pie data={data} options={options} />
     </section>
   );

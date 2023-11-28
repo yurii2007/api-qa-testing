@@ -76,7 +76,8 @@ const login = async (
 // handling user logout
 
 const logout = async (req: Request, res: Response) => {
-  const token = req.cookies["token"];
+  const { authorization = "" } = req.headers;
+  const [_, token] = authorization.split(" ");
   const { _id } = await handlers.getByToken(token, process.env.JWT_KEY || "");
 
   await User.findByIdAndUpdate(_id, { token: "" });
