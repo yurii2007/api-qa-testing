@@ -22,13 +22,13 @@ const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) =
           return (
             <li
               key={index}
-              className="flex gap-5 text-font-primary font-medium text-[0.675rem] leading-3 tracking-wide text-left"
+              className="font-medium text-[0.675rem] leading-3 tracking-wide text-left relative pl-9"
             >
               <input
                 type="radio"
                 id={answer}
                 name={`answer${idx}`}
-                className="w-[18px] h-[18px] border rounded-full"
+                className="w-[18px] h-[18px] peer rounded-full appearance-none absolute top-0 left-0 z-[1] border border-font-primary "
                 onChange={(e) =>
                   e.target.checked
                     ? dispatch(
@@ -37,7 +37,10 @@ const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) =
                     : null
                 }
               />
-              <label htmlFor={answer}>{answer}</label>
+              <span className="absolute top-[4px] left-[4px] p-1 w-[10px] h-[10px] rounded-full peer-checked:bg-btn-primary"></span>
+              <label className="text-font-primary" htmlFor={answer}>
+                {answer}
+              </label>
             </li>
           );
         })}

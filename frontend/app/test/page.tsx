@@ -1,18 +1,22 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { selectQuestions } from "@/redux/selectors";
+import type { AppDispatch } from "@/redux/store";
 
-import ProtectedRoute from "@/components/protectedRoute";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAnswers, selectQuestions } from "@/redux/selectors";
+import { useRouter } from "next/navigation";
+
+import { getResult } from "@/redux/testsReducer/operations";
 
 import QuestionList from "./components/questionlist";
 import HomeLinks from "@/components/main_links";
-import { AppDispatch } from "@/redux/store";
-import { getResult } from "@/redux/testsReducer/operations";
+import ProtectedRoute from "@/components/protectedRoute";
 
 const Page = () => {
   const questions = useSelector(selectQuestions);
+  const answers = useSelector(selectAnswers);
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
   if (questions.length === 0) {
     return (
@@ -21,6 +25,11 @@ const Page = () => {
       </ProtectedRoute>
     );
   }
+
+  const onFinishClick = () => {
+    dispatch(getResult());
+    router.replace("/result");
+  };
 
   return (
     <ProtectedRoute>
@@ -31,10 +40,11 @@ const Page = () => {
           theory_ ]
         </p>
         <button
-          onClick={() => dispatch(getResult())}
+          onClick={onFinishClick}
           className="primary-btn bg-btn-primary px-10 py-[1.125rem] text-white text-[0.625rem]
-           leading-3 tracking-wide text-center font-medium capitalize"
+           leading-3 tracking-wide text-center font-medium capitalize disabled:opacity-70"
           type="button"
+          disabled={answers.length !== 12}
         >
           Finish test
         </button>
