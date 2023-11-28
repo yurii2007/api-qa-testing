@@ -22,6 +22,11 @@ const config: Config = {
         "bg-footer": "#02172A",
         "font-footer": "#FFFFFF66",
       },
+      backgroundImage: {
+        "useful-info-sm": "url(/bg_usefulinfo_sm.png)",
+        "useful-info-md": "url(/bg_usefulinfo_md.png)",
+        "useful-info-xl": "url(/bg_usefulinfo_xl.png)",
+      },
     },
   },
   plugins: [],

@@ -20,10 +20,14 @@ const HomeLinks = () => {
           dispatch(getQuestions("tech"));
         }}
         href="/test"
-        className="home-link bg-btn-secondary"
+        className="group home-link bg-btn-secondary"
       >
         QA technical training
-        <Image src={Arrow} alt="arrow" />
+        <Image
+          src={Arrow}
+          alt="arrow"
+          className="group-hover:translate-x-2 transition-transform"
+        />
       </Link>
       <Link
         onClick={() => {
@@ -31,10 +35,14 @@ const HomeLinks = () => {
           dispatch(getQuestions("tech"));
         }}
         href="/test"
-        className="home-link bg-btn-primary xl:px-32"
+        className="group home-link bg-btn-primary xl:px-32"
       >
         Testing theory
-        <Image src={Arrow} alt="arrow" />
+        <Image
+          src={Arrow}
+          alt="arrow"
+          className="group-hover:translate-x-2 transition-transform"
+        />
       </Link>
     </div>
   );
