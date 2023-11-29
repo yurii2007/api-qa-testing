@@ -1,10 +1,9 @@
-import { IAnswer, IQuestion } from "../app.types";
-import TechTest from "../models/techTest";
-import TheoryTest from "../models/theoryTest";
-import HttpError from "./HttpError";
+import TechTest from "../models/techTest.js";
+import TheoryTest from "../models/theoryTest.js";
+import HttpError from "./HttpError.js";
 
-const getFinalResult = async (answers: IAnswer[], type: "tech" | "theory") => {
-  let questions: IQuestion[] | any[] = [];
+const getFinalResult = async (answers, type) => {
+  let questions = [];
   switch (type) {
     case "tech":
       const techQuestions = await TechTest.find();

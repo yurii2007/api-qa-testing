@@ -1,26 +1,26 @@
 import express from "express";
 import passport from "passport";
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+import GoogleStrategy from "passport-google-oauth20";
 
-import utils from "../../utils";
-import authHandlers from "../../controllers/auth";
-import middlewares from "../../middlewares";
+import utils from "../../utils/index.js";
+import authHandlers from "../../controllers/auth.js";
+import middlewares from "../../middlewares/index.js";
 
 const { GOOGLE_CLIENTID, GOOGLE_CLIENT_SECRET } = process.env;
 
 passport.use(
-  new GoogleStrategy(
+  new GoogleStrategy.Strategy(
     {
       clientID: GOOGLE_CLIENTID,
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: "https://qa-testing-y6ws.onrender.com/api/auth/google/callback",
     },
-    async (accessToken: any, refreshToken: any, profile: any, cb: any) => {
+    async (accessToken, refreshToken, profile, cb) => {
       //checking on existing user
       try {
         const token = await utils.redirectGoogleUser(profile);
         return cb(null, token);
-      } catch (error: any) {
+      } catch (error) {
         return cb(null, error.message);
       }
     }

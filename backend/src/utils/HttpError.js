@@ -1,6 +1,6 @@
 import createHttpError from "http-errors";
 
-const HttpError = (status: number, message: string) => {
+const HttpError = (status, message) => {
   const error = createHttpError();
   error.status = status;
   error.message = message;

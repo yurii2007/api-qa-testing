@@ -1,6 +1,6 @@
 import { model } from "mongoose";
 
-import { testSchema } from "./techTest";
+import { testSchema } from "./techTest.js";
 
 const TheoryTest = model("theory-question", testSchema);
 
