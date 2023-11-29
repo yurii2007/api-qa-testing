@@ -13,8 +13,8 @@ export const register = createAsyncThunk(
       const { data } = await instance.post("/api/auth/register", credentials);
       token(data.accessToken);
       return data;
-    } catch (error) {
-      thunkAPI.rejectWithValue(error);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -26,8 +26,8 @@ export const login = createAsyncThunk(
       const { data } = await instance.post("api/auth/login", credentials);
       token(data.accessToken);
       return data;
-    } catch (error) {
-      thunkAPI.rejectWithValue(error);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -41,22 +41,22 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     token(state.auth.token);
     const { data } = await instance.post("/api/auth/logout");
     return data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 
 export const getCurrent = createAsyncThunk("auth/current", async (_, thunkAPI) => {
   const state: any = await thunkAPI.getState();
 
-  if (!state.auth.token) return thunkAPI.rejectWithValue("Unauthorized");
+  if (!state.auth.token) return thunkAPI.rejectWithValue("");
 
   try {
     token(state.auth.token);
     const { data } = await instance.get("/api/auth/current");
     return data;
-  } catch (error) {
-    thunkAPI.rejectWithValue(error);
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 

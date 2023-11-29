@@ -1,4 +1,4 @@
-import PublicRoute from "@/components/publicRoute";
+import PublicRoute from "@/components/shared/publicRoute";
 
 const Page = () => {
   return <PublicRoute>{}</PublicRoute>;

@@ -10,6 +10,7 @@ interface ITestState {
   isLoading: boolean;
   result: null | number;
   type: "tech" | "theory" | "";
+  error: unknown;
 }
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   isLoading: false,
   result: null,
   type: "",
+  error: "",
 } as ITestState;
 
 const pendingTests = (state: ITestState) => {
@@ -35,8 +37,9 @@ export const testSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getQuestions.pending, pendingTests)
-      .addCase(getQuestions.rejected, (state) => {
+      .addCase(getQuestions.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = action.payload;
       })
 
       .addCase(getResult.pending, pendingTests)
@@ -44,8 +47,9 @@ export const testSlice = createSlice({
         state.result = payload.rightAnswers;
         state.isLoading = false;
       })
-      .addCase(getResult.rejected, (state) => {
+      .addCase(getResult.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase(addAnswer, (state, { payload: { answer } }) => {
         const prevAnswer = state.answers.findIndex(

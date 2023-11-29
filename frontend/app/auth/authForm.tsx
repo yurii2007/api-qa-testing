@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 
 import { login, register } from "@/redux/authReducer/operations";
 import { AppDispatch } from "@/redux/store";
+import { toast } from "react-toastify";
 
 interface SubmittedValues {
   email: string;
@@ -45,7 +46,15 @@ const AuthForm = ({ isRegister = false }) => {
       : { email: "", password: "" },
     validate,
     onSubmit: (values, { resetForm }) => {
-      isRegister ? dispatch(register({ ...values })) : dispatch(login({ ...values }));
+      isRegister
+        ? dispatch(register({ ...values }))
+            .unwrap()
+            .then(() => toast.info("Please check your email"))
+            .catch((error) => toast.error(error))
+        : dispatch(login({ ...values }))
+            .unwrap()
+            .then(() => toast.success("Successfully logged in"))
+            .catch((error) => toast.error(error));
       resetForm();
     },
   });

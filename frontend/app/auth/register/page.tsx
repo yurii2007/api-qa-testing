@@ -1,4 +1,4 @@
-import PublicRoute from "@/components/publicRoute";
+import PublicRoute from "@/components/shared/publicRoute";
 import FormWrapper from "../form_wrapper";
 
 const Page = () => {

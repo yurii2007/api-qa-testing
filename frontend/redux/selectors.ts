@@ -10,6 +10,8 @@ export const selectToken = (state: RootState) => state.auth.token;
 
 const selectIsAuth = (state: RootState) => state.auth.isAuth;
 
+const selectAuthError = (state: RootState) => state.auth.error;
+
 export const selectIsAuthenticate = createSelector(
   [selectIsLoggedIn, selectToken, selectIsAuth],
   (isLoggedIn, token, isAuth) => isLoggedIn && token && isAuth
@@ -27,6 +29,8 @@ export const selectAnswers = (state: RootState) => state.tests.answers;
 
 const selectIsTestsLoading = (state: RootState) => state.auth.isLoading;
 
+const selectTestsError = (state: RootState) => state.tests.error;
+
 export const selectResult = (state: RootState) => state.tests.result;
 
 // app selectors
@@ -34,4 +38,9 @@ export const selectResult = (state: RootState) => state.tests.result;
 export const isLoading = createSelector(
   [selectIsAuthLoading, selectIsTestsLoading],
   (isAuthLoading, isTestsLoading) => isAuthLoading || isTestsLoading
+);
+
+export const selectError = createSelector(
+  [selectAuthError, selectTestsError],
+  (authError, testsError) => authError || testsError
 );

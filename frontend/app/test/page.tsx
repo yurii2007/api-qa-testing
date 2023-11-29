@@ -9,8 +9,8 @@ import { useRouter } from "next/navigation";
 import { getResult } from "@/redux/testsReducer/operations";
 
 import QuestionList from "./components/questionlist";
-import HomeLinks from "@/components/main_links";
-import ProtectedRoute from "@/components/protectedRoute";
+import HomeLinks from "@/components/shared/main_links";
+import ProtectedRoute from "@/components/shared/protectedRoute";
 
 const Page = () => {
   const questions = useSelector(selectQuestions);
