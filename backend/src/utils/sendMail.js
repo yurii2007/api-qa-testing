@@ -1,10 +1,8 @@
 import nodemailer from "nodemailer";
-require("dotenv").config();
+import dotenv from "dotenv";
 
-interface IMailData {
-  to: string;
-  html: string;
-}
+
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
   host: "smtp.meta.ua",
@@ -16,7 +14,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendEmail = async (data: IMailData) => {
+const sendEmail = async (data) => {
   const email = {
     ...data,
     subject: "Please confirm your email",
@@ -27,4 +25,4 @@ const sendEmail = async (data: IMailData) => {
   return response;
 };
 
-export default sendEmail
+export default sendEmail;

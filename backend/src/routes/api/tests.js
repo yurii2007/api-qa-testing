@@ -1,8 +1,8 @@
 import express from "express";
 
-import testsHandlers from "../../controllers/tests";
-import middlewares from "../../middlewares";
-import schemas from "../../utils/schemas";
+import testsHandlers from "../../controllers/tests.js";
+import middlewares from "../../middlewares/index.js";
+import schemas from "../../utils/schemas.js";
 
 const testsRouter = express.Router();
 

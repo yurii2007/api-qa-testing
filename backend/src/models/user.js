@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import handleMongooseError from "../utils/handleMongooseError";
+import handleMongooseError from "../utils/handleMongooseError.js";
 
 const userSchema = new Schema(
   {

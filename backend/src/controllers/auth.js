@@ -1,23 +1,14 @@
-import type { TypedRequestBody } from "../app.types";
-import { Response, Request } from "express";
-import { sign } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 import bcrypt from "bcrypt";
-const { v4: uuidv4 } = require("uuid");
+import { v4 } from "uuid";
 
-import User from "../models/user";
-import handlers from "../utils";
-import utils from "../utils";
-
-type RegisterBody = {
-  email: string;
-  password: string;
-  username: string;
-};
+import User from "../models/user.js";
+import handlers from "../utils/index.js";
 
 // handling user registration
 
-const register = async (req: TypedRequestBody<RegisterBody>, res: Response) => {
+const register = async (req, res) => {
   const { email, password, username } = req.body;
   const user = await User.findOne({ email });
   if (user) throw handlers.HttpError(409, "User with this email already exist");
@@ -28,7 +19,7 @@ const register = async (req: TypedRequestBody<RegisterBody>, res: Response) => {
     username,
     password: hashPassword,
     avatarURL: "https://i.stack.imgur.com/l60Hf.png",
-    verificationToken: uuidv4(),
+    verificationToken: v4(),
     token: "",
   });
 
@@ -37,7 +28,7 @@ const register = async (req: TypedRequestBody<RegisterBody>, res: Response) => {
     html: `<a target="_blank" rel="noopener noreferrer" aria-label="verify" href=${process.env.VERIFY_URL}/${newUser.verificationToken}>Verify</a>`,
   };
 
-  await utils.sendEmail(verifyBody);
+  await handlers.sendEmail(verifyBody);
 
   res
     .status(201)
@@ -46,10 +37,7 @@ const register = async (req: TypedRequestBody<RegisterBody>, res: Response) => {
 
 // handling user login
 
-const login = async (
-  req: TypedRequestBody<Pick<RegisterBody, "email" | "password">>,
-  res: Response
-) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) throw handlers.HttpError(401, "Email or password is wrong");
@@ -58,7 +46,7 @@ const login = async (
   const isPasswordsMatch = await bcrypt.compare(password, user.password);
   if (!isPasswordsMatch) throw handlers.HttpError(401, "Email or password is wrong");
 
-  const JWT_token = sign({ id: user._id }, process.env.JWT_KEY || "", {
+  const JWT_token = jwt.sign({ id: user._id }, process.env.JWT_KEY || "", {
     expiresIn: "12h",
   });
   await User.findByIdAndUpdate(user._id, { token: JWT_token });
@@ -75,7 +63,7 @@ const login = async (
 
 // handling user logout
 
-const logout = async (req: Request, res: Response) => {
+const logout = async (req, res) => {
   const { authorization = "" } = req.headers;
   const [_, token] = authorization.split(" ");
   const { _id } = await handlers.getByToken(token, process.env.JWT_KEY || "");
@@ -85,7 +73,7 @@ const logout = async (req: Request, res: Response) => {
   res.status(204).json({ message: "Successfully logged out" });
 };
 
-const getCurrent = async (req: Request, res: Response) => {
+const getCurrent = async (req, res) => {
   const { authorization = "" } = req.headers;
   const [, token] = authorization.split(" ");
   const { username, email, avatarURL } = await handlers.getByToken(
@@ -103,14 +91,14 @@ const getCurrent = async (req: Request, res: Response) => {
 
 // handling redirect route after google auth
 
-const googleRedirect = async (req: TypedRequestBody<string>, res: Response) => {
+const googleRedirect = async (req, res) => {
   const token = req.user;
   res.status(201).redirect(`https://api-qa-testing.vercel.app/auth/login?token=${token}`);
 };
 
 // handling verifying email
 
-const verifyEmail = async (req: Request, res: Response) => {
+const verifyEmail = async (req, res) => {
   const { verificationToken } = req.params;
   const user = await User.findOne({ verificationToken });
   if (!user) throw handlers.HttpError(404, "Not Found");

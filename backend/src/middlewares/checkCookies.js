@@ -1,16 +1,15 @@
-import { verify } from "jsonwebtoken";
-import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
 
-import User from "../models/user";
-import utils from "../utils";
+import User from "../models/user.js";
+import utils from "../utils/index.js";
 
 // checking for auth user with jwt token
 
-const checkCookies = async (req: Request, res: Response, next: NextFunction) => {
+const checkCookies = async (req, res, next) => {
   const token = req.cookies["token"];
 
   try {
-    const { id } = verify(token, process.env.JWT_KEY || "") as any;
+    const { id } = jwt.verify(token, process.env.JWT_KEY || "");
     const user = await User.findById(id);
     if (!user || !user.token || user.token !== token) {
       next(utils.HttpError(401, "Unauthorized"));

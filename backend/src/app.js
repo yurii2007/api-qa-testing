@@ -1,23 +1,17 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import session from "express-session";
 import passport from "passport";
 
-import authRouter from "./routes/api/auth";
-import testsRouter from "./routes/api/tests";
-
-type ServerError = {
-  status?: number;
-  message?: string;
-};
+import authRouter from "./routes/api/auth.js";
+import testsRouter from "./routes/api/tests.js";
 
 // initial configuration for server
 
 dotenv.config();
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
@@ -36,7 +30,7 @@ app.use(passport.session());
 passport.serializeUser((user, done) => {
   done(null, user);
 });
-passport.deserializeUser((user: any, done) => {
+passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
@@ -47,20 +41,14 @@ app.use("/api/tests", testsRouter);
 
 // handling non existing routes
 
-app.use((_: any, res: Response) => {
+app.use((_, res) => {
   res.status(404).json({ message: "Not Found" });
 });
 
 // handling server errors
 
-app.use(
-  (
-    { status = 500, message = "Server Error" }: ServerError,
-    req: Request,
-    res: Response
-  ) => {
-    res.status(status).json(message);
-  }
-);
+app.use(({ status = 500, message = "Server Error" }, req, res, next) => {
+  res.status(status).json(message);
+});
 
-module.exports = app;
+export default app;

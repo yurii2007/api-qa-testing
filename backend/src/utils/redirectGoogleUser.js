@@ -1,11 +1,11 @@
-import { sign } from "jsonwebtoken";
-import User from "../models/user";
+import jwt from "jsonwebtoken";
+import User from "../models/user.js";
 
-const redirectGoogleUser = async (profile: any) => {
+const redirectGoogleUser = async (profile) => {
   try {
     const existingUser = await User.findOne({ email: profile.emails[0].value });
     if (existingUser) {
-      const JWT_token = sign({ id: existingUser._id }, process.env.JWT_KEY || "", {
+      const JWT_token = jwt.sign({ id: existingUser._id }, process.env.JWT_KEY || "", {
         expiresIn: "12h",
       });
       await User.findByIdAndUpdate(existingUser._id, { token: JWT_token });
@@ -16,12 +16,12 @@ const redirectGoogleUser = async (profile: any) => {
       username: profile.name.givenName,
       email: profile.emails[0].value,
       avatarURL: profile.photos[0].value ?? "https://example.com/avatar.jpg",
-      password: ' ',
-      verificationToken: ' ',
+      password: " ",
+      verificationToken: " ",
       token: "",
       verified: true,
     });
-    const JWT_token = sign({ id: newUser._id }, process.env.JWT_KEY || "", {
+    const JWT_token = jwt.sign({ id: newUser._id }, process.env.JWT_KEY || "", {
       expiresIn: "12h",
     });
     await User.findByIdAndUpdate(newUser._id, {
