@@ -19,8 +19,8 @@ export const getQuestions = createAsyncThunk(
         },
       });
       return data;
-    } catch (error) {
-      thunkAPI.rejectWithValue(error);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -34,8 +34,8 @@ export const getResult = createAsyncThunk("tests/getResult", async (_, thunkAPI)
       answers: state.tests.answers,
     });
     return data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 

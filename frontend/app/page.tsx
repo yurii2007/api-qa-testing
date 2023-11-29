@@ -1,8 +1,8 @@
 import React from "react";
-import ProtectedRoute from "@/components/protectedRoute";
+import ProtectedRoute from "@/components/shared/protectedRoute";
 
-import Quote from "./quote";
-import HomeLinks from "@/components/main_links";
+import Quote from "../components/quote";
+import HomeLinks from "@/components/shared/main_links";
 
 export default function Home() {
   return (

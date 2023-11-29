@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/components/protectedRoute";
+import ProtectedRoute from "@/components/shared/protectedRoute";
 import Content from "./content";
 
 const Page = () => {

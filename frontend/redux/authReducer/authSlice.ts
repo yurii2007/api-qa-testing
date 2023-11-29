@@ -14,10 +14,14 @@ const initialState = {
   isLoading: false,
   isRefreshing: false,
   isAuth: false,
+  error: "",
 };
 
-const rejectedAuth = () => initialState;
-const pendingAuth = (state: any) => {
+const rejectedAuth = (_: any, action: any) => ({
+  ...initialState,
+  error: action.payload,
+});
+const pendingAuth = (state: typeof initialState) => {
   state.isLoading = true;
 };
 
@@ -28,6 +32,7 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(register.pending, pendingAuth)
+      .addCase(register.rejected, rejectedAuth)
       .addCase(register.fulfilled, (state, { payload }) => {
         state.user = {
           username: payload.username,
@@ -36,7 +41,6 @@ export const authSlice = createSlice({
         };
         state.token = payload.token;
       })
-      .addCase(register.rejected, rejectedAuth)
       .addCase(login.pending, pendingAuth)
       .addCase(login.fulfilled, (state, { payload }) => {
         state.user = {

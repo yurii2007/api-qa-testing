@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useSearchParams } from "next/navigation";
 
 import FormWrapper from "../form_wrapper";
-import PublicRoute from "@/components/publicRoute";
+import PublicRoute from "@/components/shared/publicRoute";
 
 import { getCurrent, setToken } from "@/redux/authReducer/operations";
 
