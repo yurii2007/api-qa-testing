@@ -3,9 +3,11 @@ import dotenv from "dotenv";
 import cors from "cors";
 import session from "express-session";
 import passport from "passport";
+import { v2 as cloudinary } from "cloudinary";
 
 import authRouter from "./routes/api/auth.js";
 import testsRouter from "./routes/api/tests.js";
+import userRouter from "./routes/api/user.js";
 
 // initial configuration for server
 
@@ -34,10 +36,19 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
+// cloudinary configuration
+
+cloudinary.config({
+  cloud_name: "dyd0f4hrp",
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
+
 // added routes to api
 
 app.use("/api/auth", authRouter);
 app.use("/api/tests", testsRouter);
+app.use("/api/user", userRouter);
 
 // handling non existing routes
 
