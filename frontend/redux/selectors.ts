@@ -17,7 +17,7 @@ export const selectIsAuthenticate = createSelector(
   (isLoggedIn, token, isAuth) => isLoggedIn && token && isAuth
 );
 
-const selectIsAuthLoading = (state: RootState) => state.auth.isLoading;
+export const selectIsAuthLoading = (state: RootState) => state.auth.isLoading;
 
 export const selectUser = (state: RootState) => state.auth.user;
 
@@ -27,17 +27,39 @@ export const selectQuestions = (state: RootState) => state.tests.questions;
 
 export const selectAnswers = (state: RootState) => state.tests.answers;
 
-const selectIsTestsLoading = (state: RootState) => state.auth.isLoading;
+export const selectIsTestsLoading = (state: RootState) => state.auth.isLoading;
 
-const selectTestsError = (state: RootState) => state.tests.error;
+export const selectTestsError = (state: RootState) => state.tests.error;
 
 export const selectResult = (state: RootState) => state.tests.result;
+
+// User selectors
+
+export const selectUserLoading = (state: RootState) => state.user.isLoading;
+
+export const selectUserName = (state: RootState) => state.user.username;
+export const selectUserEmail = (state: RootState) => state.user.email;
+export const selectUserAvatar = (state: RootState) => state.user.avatarURL;
+export const selectUserAvg = (state: RootState) => state.user.averageResult;
+export const selectUserAmountOfTests = (state: RootState) => state.user.amountOfTests;
+
+export const selectUserInfo = createSelector(
+  [
+    selectUserName,
+    selectUserEmail,
+    selectUserAvatar,
+    selectUserAvg,
+    selectUserAmountOfTests,
+  ],
+  (username, email, avatar, avg, tests) => ({ username, email, avatar, avg, tests })
+);
 
 // app selectors
 
 export const isLoading = createSelector(
-  [selectIsAuthLoading, selectIsTestsLoading],
-  (isAuthLoading, isTestsLoading) => isAuthLoading || isTestsLoading
+  [selectIsAuthLoading, selectIsTestsLoading, selectUserLoading],
+  (isAuthLoading, isTestsLoading, isUserLoading) =>
+    isAuthLoading || isTestsLoading || isUserLoading
 );
 
 export const selectError = createSelector(

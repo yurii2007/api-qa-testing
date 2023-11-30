@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useSelector } from "react-redux";
-import { selectIsAuthenticate, selectUser } from "@/redux/selectors";
 import { useMediaQuery } from "react-responsive";
+
+import { selectIsAuthenticate, selectUser } from "@/redux/selectors";
+
 import SignOut from "./signOut";
 
 const UserProfile = () => {
@@ -15,7 +18,10 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="ml-auto mr-5 md:flex md:ml-0 items-center gap-2">
+      <Link
+        href="/user"
+        className="block ml-auto mr-5 md:flex md:ml-0 items-center gap-2 cursor-pointer"
+      >
         <Image
           src={user.avatarURL}
           width={30}
@@ -26,7 +32,7 @@ const UserProfile = () => {
         {isSmallScreen ? null : (
           <span className="block header-text">{user.username}</span>
         )}
-      </div>
+      </Link>
       {isSmallScreen ? null : <SignOut />}
     </>
   );
