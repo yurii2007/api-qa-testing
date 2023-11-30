@@ -19,8 +19,16 @@ const getTheoryQuestions = async (_, res) => {
 // handling upcoming answers to check
 
 const getResult = async (req, res) => {
+  // get token from request headers to update user data about tests
+  const { authorization = "" } = req.headers;
+  const [_, token] = authorization.split(" ");
+
   const { answers, type } = req.body;
   const result = await utils.getFinalResult(answers, type);
+
+  const user = await utils.getByToken(token, process.env.JWT_KEY);
+  await utils.updateAverage(user, result);
+
   res.status(200).send({ rightAnswers: result });
 };
 

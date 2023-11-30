@@ -26,6 +26,18 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Verify token is required"],
     },
+    averageResult: {
+      type: Number,
+      default: 0,
+    },
+    testsResults: {
+      type: Array,
+      default: [],
+    },
+    amountOfTests: {
+      type: Number,
+      default: 0,
+    },
   },
   { versionKey: false }
 );

@@ -6,6 +6,7 @@ import getByToken from "./getUserbyToken.js";
 import sendEmail from "./sendMail.js";
 import redirectGoogleUser from "./redirectGoogleUser.js";
 import getFinalResult from "./getFinalResult.js";
+import updateAverage from "./updateAverage.js";
 
 const utils = {
   handleMongooseError,
@@ -16,6 +17,7 @@ const utils = {
   sendEmail,
   redirectGoogleUser,
   getFinalResult,
+  updateAverage,
 };
 
 export default utils;
