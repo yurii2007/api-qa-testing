@@ -17,6 +17,7 @@ import storage from "redux-persist/lib/storage";
 
 import { authReducer } from "./authReducer/authSlice";
 import { testReducer } from "./testsReducer/testSlice";
+import { userReducer } from "./userReducer/userSlice";
 
 export interface State {
   user: User;
@@ -42,6 +43,7 @@ export const store = configureStore({
   reducer: {
     auth: persistedAuth,
     tests: persistedTests,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

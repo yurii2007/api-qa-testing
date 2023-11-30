@@ -10,9 +10,9 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "static.vecteezy.com",
+        hostname: "res.cloudinary.com",
         port: "",
-        pathname: "/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg",
+        pathname: "/dyd0f4hrp/image/upload/**",
       },
     ],
   },
