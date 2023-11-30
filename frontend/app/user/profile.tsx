@@ -1,14 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
-import UpdateFrom from "./updateForm";
 import { selectUserInfo } from "@/redux/selectors";
 import { getDetails } from "@/redux/userReducer/operation";
 
+import UpdateFrom from "./updateForm";
+import UserCard from "./userCard";
+
 const Profile = () => {
+  const [isUpdating, setUpdating] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const userInfo = useSelector(selectUserInfo);
 
@@ -17,10 +20,15 @@ const Profile = () => {
   }, []);
 
   return (
-    <div>
-      <p>{userInfo.username}</p>
-      <UpdateFrom />
-    </div>
+    <>
+      <UserCard
+        userInfo={userInfo}
+        setEditing={() => {
+          setUpdating(true);
+        }}
+      />
+      {isUpdating && <UpdateFrom />}
+    </>
   );
 };
 
