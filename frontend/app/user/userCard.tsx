@@ -29,7 +29,7 @@ const UserCard = ({
         <button
           onClick={setEditing}
           type="button"
-          className="absolute left-[170px] md:left-[105px] xl:left-[100px] top-[96px] md:bottom-0 w-[20px] h-[20px] cursor-pointer"
+          className="absolute left-[170px] md:left-[105px] xl:left-[100px] top-[96px] active:outline-none focus:outline-none md:bottom-0 w-[20px] h-[20px] cursor-pointer"
         >
           <Image src={editIcon} alt="Pencil icon" width={20} height={20} />
         </button>
