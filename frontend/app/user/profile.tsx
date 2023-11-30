@@ -9,6 +9,7 @@ import { getDetails } from "@/redux/userReducer/operation";
 
 import UpdateFrom from "./updateForm";
 import UserCard from "./userCard";
+import Overlay from "@/components/shared/overlay";
 
 const Profile = () => {
   const [isUpdating, setUpdating] = useState(false);
@@ -27,7 +28,19 @@ const Profile = () => {
           setUpdating(true);
         }}
       />
-      {isUpdating && <UpdateFrom />}
+      {isUpdating && (
+        <Overlay
+          closeModal={() => {
+            setUpdating(false);
+          }}
+        >
+          <UpdateFrom
+            closeForm={() => {
+              setUpdating(false);
+            }}
+          />
+        </Overlay>
+      )}
     </>
   );
 };

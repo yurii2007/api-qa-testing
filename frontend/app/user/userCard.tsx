@@ -1,5 +1,7 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+
+import editIcon from "@/public/svg/edit_button.svg";
 
 const UserCard = ({
   userInfo,
@@ -16,7 +18,7 @@ const UserCard = ({
 }) => {
   return (
     <div className="flex flex-col gap-1 md:gap-3 mx-auto w-[280px] md:w-[360px] xl:w-[420px] bg-white pb-1 md:pb-3 rounded-lg overflow-hidden">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 py-4 md:py-6 md:bg-slate-200">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 py-4 md:py-6 md:bg-slate-200 relative">
         <Image
           src={userInfo.avatar}
           width={100}
@@ -24,6 +26,13 @@ const UserCard = ({
           alt="User avatar"
           className="rounded-full"
         />
+        <button
+          onClick={setEditing}
+          type="button"
+          className="absolute left-[170px] md:left-[105px] xl:left-[100px] top-[96px] md:bottom-0 w-[20px] h-[20px] cursor-pointer"
+        >
+          <Image src={editIcon} alt="Pencil icon" width={20} height={20} />
+        </button>
         <div className="text-font-primary text-center md:text-left text-base md:text-lg xl:text-2xl font-medium">
           <p>{userInfo.username}</p>
           <p>{userInfo.email}</p>
