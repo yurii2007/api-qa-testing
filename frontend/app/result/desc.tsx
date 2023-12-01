@@ -33,7 +33,8 @@ const Desc = () => {
       </p>
       <Link
         href="/test"
-        className="primary-btn px-0 mt-5 md:mt-8 mx-auto block py-4 bg-btn-primary w-[190px] text-sm leading-4 tracking-wide text-white font-medium capitalize"
+        className="primary-btn px-0 mt-5 md:mt-8 mx-auto block py-4 bg-btn-primary w-[190px] text-sm leading-4 tracking-wide
+         text-white font-medium capitalize hover:opacity-90"
       >
         Try Again
       </Link>

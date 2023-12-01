@@ -31,4 +31,7 @@
   .info-list-item {
     @apply text-left text-font-primary font-medium leading-4 tracking-wide text-[0.625rem] md:text-sm xl:leading-6;
   }
+  .error-auth {
+    @apply text-xs text-red-600;
+  }
 }

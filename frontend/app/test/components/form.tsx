@@ -2,12 +2,14 @@
 
 import type { IQuestion } from "@/constants/definitions";
 import type { AppDispatch } from "@/redux/store";
-import { addAnswer } from "@/redux/testsReducer/operations";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useDispatch } from "react-redux";
+import { selectAnswers } from "@/redux/selectors";
+import { addAnswer } from "@/redux/testsReducer/operations";
 
 const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const answers = useSelector(selectAnswers);
 
   return (
     <form className="w-72 py-10 px-5 shadow-main-shadow bg-white md:w-[704px] md:pb-14 md:px-20">
@@ -29,6 +31,12 @@ const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) =
                 type="radio"
                 id={answer}
                 name={`answer${idx}`}
+                checked={
+                  answers.findIndex(
+                    (el) =>
+                      el.questionId === question.questionId && el.userAnswer === answer
+                  ) !== -1
+                }
                 className="w-[18px] h-[18px] peer rounded-full appearance-none absolute top-0 left-0 z-[1] border border-font-primary cursor-pointer"
                 onChange={(e) =>
                   e.target.checked
