@@ -67,26 +67,41 @@ const AuthForm = ({ isRegister = false }) => {
           name="username"
           placeholder="Username"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.username}
           className="input-auth"
+          required
+          maxLength={20}
         />
       )}
-      <input
-        type="text"
-        name="email"
-        placeholder="E-mail"
-        onChange={formik.handleChange}
-        value={formik.values.email}
-        className="input-auth"
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        onChange={formik.handleChange}
-        value={formik.values.password}
-        className="input-auth"
-      />
+      <label>
+        <input
+          type="text"
+          name="email"
+          placeholder="E-mail"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+          className="input-auth w-full"
+        />
+        {formik.errors.email ? (
+          <span className="error-auth">{formik.errors.email}</span>
+        ) : null}
+      </label>
+      <label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
+          className="input-auth w-full"
+        />
+        {formik.errors.password ? (
+          <span className="error-auth">{formik.errors.password}</span>
+        ) : null}
+      </label>
       <div className="flex flex-row justify-between xl:gap-4">
         <button
           type="submit"

@@ -4,6 +4,7 @@ import type { IQuestion } from "@/constants/definitions";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 
 import { questionAnimation } from "@/constants/animation";
@@ -13,6 +14,7 @@ import nextArrow from "@/public/svg/nextArrow.svg";
 
 const QuestionList = ({ questions }: { questions: IQuestion[] }) => {
   const [[currentPosition, direction], setCurrentPosition] = useState([0, "right"]);
+  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" });
 
   const changePosition = (direction: "left" | "right") => {
     if (direction === "left") {
@@ -24,15 +26,19 @@ const QuestionList = ({ questions }: { questions: IQuestion[] }) => {
   return (
     <>
       <ul className="mt-[1.125rem] flex gap-6 transition-transform justify-center">
-        <AnimatePresence initial={false} custom={direction}>
+        <AnimatePresence
+          initial={false}
+          custom={{ direction: direction, isBigScreen: isBigScreen }}
+        >
           <motion.li
             key={currentPosition}
             variants={questionAnimation}
+            custom={{ direction: direction, isBigScreen: isBigScreen }}
             initial="enter"
             animate="center"
             exit="exit"
             transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
+              x: { type: "tween", stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
           >
@@ -47,7 +53,13 @@ const QuestionList = ({ questions }: { questions: IQuestion[] }) => {
           disabled={currentPosition === 0}
           type="button"
         >
-          <Image src={prevArrow} width={24} height={24} alt="left-side arrow" className="group-hover:group-enabled:-translate-x-2 transition-transform" />
+          <Image
+            src={prevArrow}
+            width={24}
+            height={24}
+            alt="left-side arrow"
+            className="group-hover:group-enabled:-translate-x-2 transition-transform"
+          />
           <p className="hidden md:block font-medium">Previous question</p>
         </button>
         <button
@@ -57,7 +69,13 @@ const QuestionList = ({ questions }: { questions: IQuestion[] }) => {
           type="button"
         >
           <p className="hidden md:block font-medium">Next question</p>
-          <Image src={nextArrow} width={24} height={24} alt="right-side arrow" className="group-hover:group-enabled:translate-x-2 transition-transform" />
+          <Image
+            src={nextArrow}
+            width={24}
+            height={24}
+            alt="right-side arrow"
+            className="group-hover:group-enabled:translate-x-2 transition-transform"
+          />
         </button>
       </div>
     </>
