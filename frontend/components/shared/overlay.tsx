@@ -10,15 +10,14 @@ const Overlay = ({
   children: React.ReactNode;
   closeModal: () => void;
 }) => {
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.code === "Escape") closeModal();
+  const backdropClick = useCallback((e: SyntheticEvent) => {
+    if (e.target === e.currentTarget) closeModal();
   }, []);
 
-  const backdropClick = (e: SyntheticEvent) => {
-    if (e.target === e.currentTarget) closeModal();
-  };
-
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Escape") closeModal();
+    };
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);

@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </ReduxProvider>
         <Footer />
-        <ToastContainer position="top-right" autoClose={2000} draggable={false} />
+        <ToastContainer position="top-right" autoClose={3000} draggable={false} />
       </body>
     </html>
   );
