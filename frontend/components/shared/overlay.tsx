@@ -10,9 +10,12 @@ const Overlay = ({
   children: React.ReactNode;
   closeModal: () => void;
 }) => {
-  const backdropClick = useCallback((e: SyntheticEvent) => {
-    if (e.target === e.currentTarget) closeModal();
-  }, []);
+  const backdropClick = useCallback(
+    (e: SyntheticEvent) => {
+      if (e.target === e.currentTarget) closeModal();
+    },
+    [closeModal]
+  );
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -22,7 +25,8 @@ const Overlay = ({
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [closeModal]);
+
   return createPortal(
     <div
       className="bg-gray-700/70 fixed top-0 left-0 flex items-center justify-center w-screen h-screen"

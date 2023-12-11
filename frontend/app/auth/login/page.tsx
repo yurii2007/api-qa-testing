@@ -5,10 +5,11 @@ import type { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "next/navigation";
 
+import { getCurrent } from "@/redux/authReducer/operations";
+import { setToken } from "@/redux/authReducer/authSlice";
+
 import FormWrapper from "../form_wrapper";
 import PublicRoute from "@/components/shared/publicRoute";
-
-import { getCurrent, setToken } from "@/redux/authReducer/operations";
 
 const Page = () => {
   const token = useSearchParams().get("token");

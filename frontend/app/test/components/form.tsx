@@ -2,10 +2,11 @@
 
 import type { IQuestion } from "@/constants/definitions";
 import type { AppDispatch } from "@/redux/store";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectAnswers } from "@/redux/selectors";
-import { addAnswer } from "@/redux/testsReducer/operations";
+import { addAnswer } from "@/redux/testsReducer/testSlice";
 
 const QuestionForm = ({ question, idx }: { question: IQuestion; idx: number }) => {
   const dispatch = useDispatch<AppDispatch>();

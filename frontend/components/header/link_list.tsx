@@ -8,9 +8,10 @@ import { useMediaQuery } from "react-responsive";
 
 import { selectIsAuthenticate } from "@/redux/selectors";
 import { authLinks, unAuthLinks } from "@/constants/links";
+
 import SignOut from "./signOut";
 
-const LinkList = ({ openNav }: { openNav?: () => void }) => {
+const LinkList = ({ toggleNav }: { toggleNav?: () => void }) => {
   const path = usePathname();
   const isAuth = useSelector(selectIsAuthenticate);
   const isSmallScreen = useMediaQuery({ query: "(max-width: 767.9px)" });
@@ -23,18 +24,18 @@ const LinkList = ({ openNav }: { openNav?: () => void }) => {
           key={link.name}
           className="group py-7 border-b border-borders-primary md:border-none md:py-0"
         >
-          <Link href={link.path} onClick={openNav} className="relative">
+          <Link href={link.path} onClick={toggleNav} className="relative">
             {link.name}
             <span
               className={clsx(
                 `hidden absolute bottom-0 left-0 w-full h-[1px] bg-btn-primary group-hover:block`,
-                { "block": link.path === path }
+                { block: link.path === path }
               )}
             ></span>
           </Link>
         </li>
       ))}
-      {isSmallScreen ? <SignOut /> : null}
+      {isSmallScreen ? <SignOut toggleNav={toggleNav} /> : null}
     </ul>
   );
 };

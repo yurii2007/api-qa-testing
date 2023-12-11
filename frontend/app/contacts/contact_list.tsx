@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import { contactsLinks } from "@/constants/links";
 
 const ContactsList = () => {

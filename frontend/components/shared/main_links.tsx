@@ -6,7 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 
-import { getQuestions, setTypeQuestions } from "@/redux/testsReducer/operations";
+import { getQuestions } from "@/redux/testsReducer/operations";
+import { setTypeQuestions } from "@/redux/testsReducer/testSlice";
 
 import Arrow from "@/public/svg/arrow.svg";
 

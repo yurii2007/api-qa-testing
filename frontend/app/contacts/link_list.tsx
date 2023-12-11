@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { socialLinks } from "@/constants/links";
 import Link from "next/link";
+
+import { socialLinks } from "@/constants/links";
 
 const LinkList = () => {
   return (

@@ -1,11 +1,11 @@
 "use client";
 
 import type { AppDispatch } from "@/redux/store";
-import Image from "next/image";
 
+import Image from "next/image";
+import { toast } from "react-toastify";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 
 import { updateAvatar } from "@/redux/userReducer/operation";
 
@@ -35,7 +35,13 @@ const UpdateFrom = ({ closeForm }: { closeForm: () => void }) => {
       className="bg-white py-4 px-3 flex flex-col gap-4 justify-center items-center rounded-md relative"
     >
       <button onClick={closeForm} type="button">
-      <Image src={closeIcon} alt="Close form icon" width={16} height={16} className="absolute top-2 right-2" />
+        <Image
+          src={closeIcon}
+          alt="Close form icon"
+          width={16}
+          height={16}
+          className="absolute top-2 right-2"
+        />
       </button>
       <label
         className="block mb-2 text-lg font-medium text-font-primary"

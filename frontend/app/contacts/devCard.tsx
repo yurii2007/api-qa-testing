@@ -1,8 +1,9 @@
 import Image from "next/image";
-import devPhoto from "@/public/dev.jpg";
 
 import LinkList from "./link_list";
 import ContactsList from "./contact_list";
+
+import devPhoto from "@/public/dev.jpg";
 
 const DevCard = () => {
   return (
