@@ -1,8 +1,8 @@
 "use client";
 
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { getCurrent, login, logout, register, setToken } from "./operations";
+import { getCurrent, login, logout, register } from "./operations";
 
 const initialState = {
   user: {
@@ -28,7 +28,11 @@ const pendingAuth = (state: typeof initialState) => {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(register.pending, pendingAuth)
@@ -64,11 +68,9 @@ export const authSlice = createSlice({
       .addCase(getCurrent.rejected, rejectedAuth)
       .addCase(getCurrent.pending, pendingAuth)
       .addCase(logout.fulfilled, () => initialState)
-      .addCase(logout.rejected, rejectedAuth)
-      .addCase(setToken, (state, { payload }) => {
-        state.token = payload.token;
-      });
+      .addCase(logout.rejected, rejectedAuth);
   },
 });
 
+export const { setToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;

@@ -18,7 +18,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getDetails());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

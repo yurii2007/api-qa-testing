@@ -2,13 +2,15 @@
 
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-
-import logoutIcon from "@/public/svg/sign_out.svg";
-import { logout } from "@/redux/authReducer/operations";
-import { AppDispatch } from "@/redux/store";
 import { toast } from "react-toastify";
 
-const SignOut = () => {
+import type { AppDispatch } from "@/redux/store";
+
+import { logout } from "@/redux/authReducer/operations";
+
+import logoutIcon from "@/public/svg/sign_out.svg";
+
+const SignOut = ({ toggleNav }: { toggleNav?: () => void }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogoutClick = () => {
@@ -16,6 +18,7 @@ const SignOut = () => {
       .unwrap()
       .finally(() => {
         toast.success("Successfully logged out!");
+        if (toggleNav) toggleNav();
       });
   };
 

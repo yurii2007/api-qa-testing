@@ -3,10 +3,11 @@
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+
+import type { AppDispatch } from "@/redux/store";
 
 import { login, register } from "@/redux/authReducer/operations";
-import { AppDispatch } from "@/redux/store";
-import { toast } from "react-toastify";
 
 interface SubmittedValues {
   email: string;

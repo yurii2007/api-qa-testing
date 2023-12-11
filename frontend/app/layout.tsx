@@ -16,13 +16,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} subpixel-antialiased bg-bg-primary`}>
+      <body
+        className={`${montserrat.className} subpixel-antialiased bg-bg-primary flex flex-col justify-between min-h-screen`}
+      >
         <ReduxProvider>
           <Header />
           {children}
+          <ToastContainer position="top-right" autoClose={3000} draggable={false} />
         </ReduxProvider>
         <Footer />
-        <ToastContainer position="top-right" autoClose={3000} draggable={false} />
       </body>
     </html>
   );
